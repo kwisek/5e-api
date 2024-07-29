@@ -14,11 +14,11 @@ import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
 import pl.kwisek.dnd5e.service.WeaponService;
 
-@Tag(name="Weapons", description = "Operations on Weapons")
+@Tag(name="Weapon", description = "Operations on Weapons")
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/weapons", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/weapon", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class WeaponController {
 
     @Autowired

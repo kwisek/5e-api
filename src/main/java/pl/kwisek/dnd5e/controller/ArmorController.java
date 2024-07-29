@@ -17,11 +17,11 @@ import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.service.ArmorService;
 
-@Tag(name="Armors", description = "Operations on Armors")
+@Tag(name="Armor", description = "Operations on Armors")
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/armors", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/armor", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ArmorController {
 
     @Autowired
