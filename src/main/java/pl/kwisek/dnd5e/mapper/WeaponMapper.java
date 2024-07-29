@@ -1,31 +1,37 @@
 package pl.kwisek.dnd5e.mapper;
 
-import org.springframework.stereotype.Component;
-import pl.kwisek.dnd5e.dto.response.WeaponIdsResponse;
-import pl.kwisek.dnd5e.dto.response.WeaponResponse;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
+import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
+import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.WeaponEntity;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collection;
 
-@Component
-public class WeaponMapper {
+@Mapper(componentModel = "spring")
+public abstract class WeaponMapper {
 
-    public WeaponResponse toWeaponResponse(WeaponEntity weaponEntity) {
-        return new WeaponResponse(
-                weaponEntity.getName(),
-                weaponEntity.getDescription(),
-                weaponEntity.getDamageRoll(),
-                weaponEntity.getDamageType(),
-                weaponEntity.getProperties(),
-                weaponEntity.getWeight(),
-                weaponEntity.getValue(),
-                weaponEntity.getCategory(),
-                weaponEntity.getSource()
-        );
-    }
+    public ListOfNamesResponse toListOfNamesResponse(Collection<String> names) { return new ListOfNamesResponse(names); };
 
-    public WeaponIdsResponse toWeaponIdsResponse(List<String> ids) {
-        return new WeaponIdsResponse(ids);
+    @Mapping(source = "baseEntity.indexId", target = "index")
+    @Mapping(source = "baseEntity.category", target = "category")
+    @Mapping(source = "baseEntity.subCategory", target = "subCategory")
+    @Mapping(source = "baseEntity.name", target = "name")
+    @Mapping(source = "baseEntity.source", target = "source")
+    @Mapping(source = "weaponEntity.cost", target = "cost")
+    @Mapping(source = "weaponEntity.weight", target = "weight")
+    @Mapping(source = "weaponEntity.damageType", target = "damageType")
+    @Mapping(source = "weaponEntity.damageRoll", target = "damageRoll")
+    @Mapping(target = "properties", expression = "java(new java.util.ArrayList<>())") // values handled by mapProperties()
+    @Mapping(source = "description", target = "description")
+    public abstract WeaponDetailsResponse toWeaponDetailsResponse(BaseEntity baseEntity, WeaponEntity weaponEntity, Collection<String> description);
+
+    @AfterMapping
+    protected void mapProperties(WeaponEntity weaponEntity, @MappingTarget WeaponDetailsResponse target) {
+        target.getProperties().addAll(Arrays.stream(weaponEntity.getProperties().split(",")).toList());
     }
 }

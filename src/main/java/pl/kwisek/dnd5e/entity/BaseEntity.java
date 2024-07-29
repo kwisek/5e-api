@@ -1,25 +1,27 @@
 package pl.kwisek.dnd5e.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.util.List;
-
+@Entity
 @Data
-@MappedSuperclass
-public abstract class BaseEntity {
-
+@Table(name = "BaseEntity")
+public class BaseEntity {
     @Id
-    @Column(name = "id")
-    private String id;
+    @Column(name = "indexId")
+    private String indexId;
+
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "subCategory")
+    private String subCategory;
 
     @Column(name = "name")
     private String name;
-
-    @ElementCollection
-    @CollectionTable(name="object_descriptions", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "description")
-    private List<String> description;
 
     @Column(name = "source")
     private String source;

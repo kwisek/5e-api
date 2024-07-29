@@ -1,0 +1,10 @@
+spring.datasource.url: jdbc:sqlite:5e.db
+spring.datasource.driver-class-name: org.sqlite.JDBC
+spring.jpa:
+  database-platform: org.hibernate.community.dialect.SQLiteDialect
+  hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+logging.level.org:
+  hibernate:
+    SQL: DEBUG
+    type.descriptor.sql.BasicBinder: TRACE
+    orm.jdbc.bind: TRACE
