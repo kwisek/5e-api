@@ -2,10 +2,10 @@ package pl.kwisek.dnd5e.service;
 
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
-import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
+import pl.kwisek.dnd5e.dto.response.ArmorDetailsResponse;
 
-public interface WeaponService {
+public interface ArmorService {
     ListOfNamesResponse getAllNames();
     ListOfIndexesResponse getAllIndexes();
-    WeaponDetailsResponse getDetails(String index);
+    ArmorDetailsResponse getDetails(String index);
 }

@@ -2,15 +2,12 @@ package pl.kwisek.dnd5e.dto.response;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Setter;
 import lombok.Value;
 
 import java.util.Collection;
-import java.util.List;
 
 @Value
 public class WeaponDetailsResponse {
-
     @Schema(example = "weapon_longsword")
     String index;
 

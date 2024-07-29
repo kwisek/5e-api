@@ -1,6 +1,5 @@
 package pl.kwisek.dnd5e.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
 import pl.kwisek.dnd5e.service.WeaponService;
@@ -27,14 +27,22 @@ public class WeaponController {
     @ApiResponse(responseCode = "200", description = "Returns a list of all available Weapon names.")
     @GetMapping(path = "/names")
     public ResponseEntity<ListOfNamesResponse> getWeaponNames() {
-        ListOfNamesResponse listOfNamesResponse = weaponService.getWeaponNames();
+        ListOfNamesResponse listOfNamesResponse = weaponService.getAllNames();
 
         return new ResponseEntity<>(listOfNamesResponse, HttpStatus.OK);
+    }
+
+    @ApiResponse(responseCode = "200", description = "Returns a list of all available Weapon indexes.")
+    @GetMapping(path = {"/indexes", "/ids"})
+    public ResponseEntity<ListOfIndexesResponse> getWeaponIndexes() {
+        ListOfIndexesResponse listOfIndexesResponse = weaponService.getAllIndexes();
+
+        return new ResponseEntity<>(listOfIndexesResponse, HttpStatus.OK);
     }
 
     @ApiResponse(responseCode = "200", description = "Returns details of Weapon identified by provided index.")
     @GetMapping(path = "")
     public ResponseEntity<WeaponDetailsResponse> getWeaponDetails(@RequestParam(required = true) String index) {
-        return new ResponseEntity<>(weaponService.getWeaponDetails(index), HttpStatus.OK);
+        return new ResponseEntity<>(weaponService.getDetails(index), HttpStatus.OK);
     }
 }
