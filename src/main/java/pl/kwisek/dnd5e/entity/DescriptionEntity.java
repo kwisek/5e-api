@@ -5,9 +5,9 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Description")
-@IdClass(DescriptionId.class)
 @Data
+@IdClass(DescriptionId.class)
+@Table(name = "Description")
 public class DescriptionEntity {
     @Id
     @Column(name = "entityId")
