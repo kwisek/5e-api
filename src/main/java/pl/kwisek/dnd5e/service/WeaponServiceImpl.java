@@ -9,8 +9,8 @@ import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.WeaponEntity;
 import pl.kwisek.dnd5e.mapper.WeaponDetailsResponseMapper;
-import pl.kwisek.dnd5e.repo.EntityDescriptionRepository;
-import pl.kwisek.dnd5e.repo.EntityRepository;
+import pl.kwisek.dnd5e.repo.DescriptionRepository;
+import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 import pl.kwisek.dnd5e.repo.WeaponRepository;
 
 import java.util.Collection;
@@ -21,9 +21,9 @@ import java.util.Optional;
 public class WeaponServiceImpl implements WeaponService {
 
     @Autowired
-    private EntityRepository entityRepository;
+    private BaseEntityRepository baseEntityRepository;
     @Autowired
-    private EntityDescriptionRepository entityDescriptionRepository;
+    private DescriptionRepository descriptionRepository;
     @Autowired
     private WeaponRepository weaponRepository;
     @Autowired
@@ -42,9 +42,9 @@ public class WeaponServiceImpl implements WeaponService {
 
     @Override
     public WeaponDetailsResponse getDetails(String index) {
-        Optional<BaseEntity> baseEntity = this.entityRepository.findByIndex(index);
+        Optional<BaseEntity> baseEntity = this.baseEntityRepository.findByIndex(index);
         Optional<WeaponEntity> weaponEntity = this.weaponRepository.findByIndex(index);
-        Collection<String> description = this.entityDescriptionRepository.findByIndex(index);
+        Collection<String> description = this.descriptionRepository.findByIndex(index);
 
         if (baseEntity.isEmpty() || weaponEntity.isEmpty() || description.isEmpty()) {
             throw new EntityNotFoundException("No weapon matches index: " + index);

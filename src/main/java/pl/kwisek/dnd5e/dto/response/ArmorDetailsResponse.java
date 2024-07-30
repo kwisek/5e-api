@@ -7,7 +7,7 @@ import lombok.Value;
 import java.util.Collection;
 
 @Value
-public class ArmorDetailsResponse {
+public class ArmorDetailsResponse extends BaseEntityResponse {
     @Schema(example = "armor-plate")
     String index;
 

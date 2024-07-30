@@ -10,8 +10,8 @@ import pl.kwisek.dnd5e.entity.ArmorEntity;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.mapper.ArmorDetailsResponseMapper;
 import pl.kwisek.dnd5e.repo.ArmorRepository;
-import pl.kwisek.dnd5e.repo.EntityDescriptionRepository;
-import pl.kwisek.dnd5e.repo.EntityRepository;
+import pl.kwisek.dnd5e.repo.DescriptionRepository;
+import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,11 +21,11 @@ import java.util.Optional;
 public class ArmorServiceImpl implements ArmorService {
 
     @Autowired
-    private EntityRepository entityRepository;
+    private BaseEntityRepository baseEntityRepository;
     @Autowired
     private ArmorRepository armorRepository;
     @Autowired
-    private EntityDescriptionRepository entityDescriptionRepository;
+    private DescriptionRepository descriptionRepository;
     @Autowired
     private ArmorDetailsResponseMapper armorDetailsResponseMapper;
 
@@ -42,9 +42,9 @@ public class ArmorServiceImpl implements ArmorService {
 
     @Override
     public ArmorDetailsResponse getDetails(String index) {
-        Optional<BaseEntity> baseEntity = this.entityRepository.findByIndex(index);
+        Optional<BaseEntity> baseEntity = this.baseEntityRepository.findByIndex(index);
         Optional<ArmorEntity> armorEntity = this.armorRepository.findByIndex(index);
-        Collection<String> description = this.entityDescriptionRepository.findByIndex(index);
+        Collection<String> description = this.descriptionRepository.findByIndex(index);
 
         if (baseEntity.isEmpty() || armorEntity.isEmpty() || description.isEmpty()) {
             throw new EntityNotFoundException("No armor matches index: " + index);

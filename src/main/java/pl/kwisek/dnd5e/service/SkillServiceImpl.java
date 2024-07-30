@@ -9,8 +9,8 @@ import pl.kwisek.dnd5e.dto.response.SkillDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.SkillEntity;
 import pl.kwisek.dnd5e.mapper.SkillDetailsResponseMapper;
-import pl.kwisek.dnd5e.repo.EntityDescriptionRepository;
-import pl.kwisek.dnd5e.repo.EntityRepository;
+import pl.kwisek.dnd5e.repo.DescriptionRepository;
+import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 import pl.kwisek.dnd5e.repo.SkillRepository;
 
 import java.util.Collection;
@@ -20,9 +20,9 @@ import java.util.Optional;
 @Service
 public class SkillServiceImpl implements SkillService {
     @Autowired
-    private EntityRepository entityRepository;
+    private BaseEntityRepository baseEntityRepository;
     @Autowired
-    private EntityDescriptionRepository entityDescriptionRepository;
+    private DescriptionRepository descriptionRepository;
     @Autowired
     private SkillRepository skillRepository;
     @Autowired
@@ -42,9 +42,9 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public SkillDetailsResponse getDetails(String index) {
-        Optional<BaseEntity> baseEntity = this.entityRepository.findByIndex(index);
+        Optional<BaseEntity> baseEntity = this.baseEntityRepository.findByIndex(index);
         Optional<SkillEntity> skillEntity = this.skillRepository.findByIndex(index);
-        Collection<String> description = this.entityDescriptionRepository.findByIndex(index);
+        Collection<String> description = this.descriptionRepository.findByIndex(index);
 
         if (baseEntity.isEmpty() || skillEntity.isEmpty() || description.isEmpty()) {
             throw new EntityNotFoundException("No skill matches index: " + index);
