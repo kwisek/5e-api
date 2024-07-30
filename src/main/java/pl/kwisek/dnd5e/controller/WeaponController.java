@@ -11,7 +11,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
-import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
 import pl.kwisek.dnd5e.service.WeaponService;
 
 @Tag(name="Weapon", description = "Operations on Weapons")
@@ -38,11 +37,5 @@ public class WeaponController {
         ListOfIndexesResponse listOfIndexesResponse = weaponService.getAllIndexes();
 
         return new ResponseEntity<>(listOfIndexesResponse, HttpStatus.OK);
-    }
-
-    @ApiResponse(responseCode = "200", description = "Returns details of Weapon identified by provided index.")
-    @GetMapping(path = "")
-    public ResponseEntity<WeaponDetailsResponse> getWeaponDetails(@RequestParam(required = true) String index) {
-        return new ResponseEntity<>(weaponService.getDetails(index), HttpStatus.OK);
     }
 }

@@ -10,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.kwisek.dnd5e.dto.response.ArmorDetailsResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.service.ArmorService;
@@ -41,11 +39,5 @@ public class ArmorController {
         ListOfIndexesResponse listOfIndexesResponse = armorService.getAllIndexes();
 
         return new ResponseEntity<>(listOfIndexesResponse, HttpStatus.OK);
-    }
-
-    @ApiResponse(responseCode = "200", description = "Returns details of Armor identified by provided index.")
-    @GetMapping(path = "")
-    public ResponseEntity<ArmorDetailsResponse> getArmorDetails(@RequestParam(required = true) String index) {
-        return new ResponseEntity<>(armorService.getDetails(index), HttpStatus.OK);
     }
 }
