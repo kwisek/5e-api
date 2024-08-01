@@ -13,30 +13,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
-import pl.kwisek.dnd5e.service.WeaponService;
+import pl.kwisek.dnd5e.service.SpellService;
 
-@Tag(name="Weapon", description = "Operations on Weapons")
+@Tag(name="Spell", description = "Operations on Spells")
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/weapon", produces = {MediaType.APPLICATION_JSON_VALUE})
-public class WeaponController {
+@RequestMapping(path = "/spell", produces = {MediaType.APPLICATION_JSON_VALUE})
+public class SpellController {
 
     @Autowired
-    private final WeaponService weaponService;
+    private final SpellService spellService;
 
-    @ApiResponse(responseCode = "200", description = "Returns a list of all available Weapon names.")
+    @ApiResponse(responseCode = "200", description = "Returns a list of all available Spell names.")
     @GetMapping(path = "/names")
-    public ResponseEntity<ListOfNamesResponse> getWeaponNames() {
-        ListOfNamesResponse listOfNamesResponse = weaponService.getAllNames();
+    public ResponseEntity<ListOfNamesResponse> getSpellNames() {
+        ListOfNamesResponse listOfNamesResponse = spellService.getAllNames();
 
         return new ResponseEntity<>(listOfNamesResponse, HttpStatus.OK);
     }
 
-    @ApiResponse(responseCode = "200", description = "Returns a list of all available Weapon indexes.")
+    @ApiResponse(responseCode = "200", description = "Returns a list of all available Spell indexes.")
     @GetMapping(path = {"/indexes", "/ids"})
     public ResponseEntity<ListOfIndexesResponse> getWeaponIndexes() {
-        ListOfIndexesResponse listOfIndexesResponse = weaponService.getAllIndexes();
+        ListOfIndexesResponse listOfIndexesResponse = spellService.getAllIndexes();
 
         return new ResponseEntity<>(listOfIndexesResponse, HttpStatus.OK);
     }
