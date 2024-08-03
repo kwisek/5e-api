@@ -45,6 +45,14 @@ public class CommonServiceImpl implements CommonService {
     private SpellRepository spellRepository;
     @Autowired
     private SpellDetailsResponseMapper spellDetailsResponseMapper;
+    @Autowired
+    private ContainerRepository containerRepository;
+    @Autowired
+    private ContainerDetailsResponseMapper containerDetailsResponseMapper;
+    @Autowired
+    private EquipmentPackRepository equipmentPackRepository;
+    @Autowired
+    private EquipmentPackDetailsResponseMapper equipmentPackDetailsResponseMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -90,6 +98,14 @@ public class CommonServiceImpl implements CommonService {
             case "Spell" -> {
                 Optional<SpellEntity> spellEntity = this.spellRepository.findByIndex(index);
                 return spellDetailsResponseMapper.from(baseEntity.get(), spellEntity.get(), description);
+            }
+            case "Container" -> {
+                Optional<ContainerEntity> containerEntity = this.containerRepository.findByIndex(index);
+                return containerDetailsResponseMapper.from(baseEntity.get(), containerEntity.get(), description);
+            }
+            case "EquipmentPack" -> {
+                Optional<EquipmentPackEntity> equipmentPackEntity = this.equipmentPackRepository.findByIndex(index);
+                return equipmentPackDetailsResponseMapper.from(baseEntity.get(), equipmentPackEntity.get(), description);
             }
         }
 
