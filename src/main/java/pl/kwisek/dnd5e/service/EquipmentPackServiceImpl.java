@@ -8,7 +8,7 @@ import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.EquipmentPackEntity;
-import pl.kwisek.dnd5e.mapper.EquipmentPackDetailsResponseMapper;
+import pl.kwisek.dnd5e.mapper.EquipmentPackDetailsMapper;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 import pl.kwisek.dnd5e.repo.DescriptionRepository;
 import pl.kwisek.dnd5e.repo.EquipmentPackRepository;
@@ -26,7 +26,7 @@ public class EquipmentPackServiceImpl implements EquipmentPackService {
     @Autowired
     EquipmentPackRepository equipmentPackRepository;
     @Autowired
-    EquipmentPackDetailsResponseMapper equipmentPackDetailsResponseMapper;
+    EquipmentPackDetailsMapper equipmentPackDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -50,6 +50,6 @@ public class EquipmentPackServiceImpl implements EquipmentPackService {
             throw new EntityNotFoundException("No equipment pack matches index: " + index);
         }
 
-        return equipmentPackDetailsResponseMapper.from(baseEntity.get(), equipmentPackEntity.get(), description);
+        return equipmentPackDetailsMapper.toEquipmentPackDetailsResponse(baseEntity.get(), equipmentPackEntity.get(), description);
     }
 }

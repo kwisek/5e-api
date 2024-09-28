@@ -19,7 +19,7 @@ import pl.kwisek.dnd5e.service.WeaponService;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/weapon", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/v1/weapon", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class WeaponController {
 
     @Autowired

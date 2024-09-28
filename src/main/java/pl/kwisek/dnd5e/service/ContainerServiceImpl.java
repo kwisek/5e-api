@@ -3,17 +3,13 @@ package pl.kwisek.dnd5e.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.kwisek.dnd5e.dto.response.ConceptDetailsResponse;
 import pl.kwisek.dnd5e.dto.response.ContainerDetailsResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
-import pl.kwisek.dnd5e.entity.ConceptEntity;
 import pl.kwisek.dnd5e.entity.ContainerEntity;
-import pl.kwisek.dnd5e.mapper.ConceptDetailsResponseMapper;
-import pl.kwisek.dnd5e.mapper.ContainerDetailsResponseMapper;
+import pl.kwisek.dnd5e.mapper.ContainerDetailsMapper;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
-import pl.kwisek.dnd5e.repo.ConceptRepository;
 import pl.kwisek.dnd5e.repo.ContainerRepository;
 import pl.kwisek.dnd5e.repo.DescriptionRepository;
 
@@ -30,7 +26,7 @@ public class ContainerServiceImpl implements ContainerService {
     @Autowired
     private DescriptionRepository descriptionRepository;
     @Autowired
-    private ContainerDetailsResponseMapper containerDetailsResponseMapper;
+    private ContainerDetailsMapper containerDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -53,6 +49,6 @@ public class ContainerServiceImpl implements ContainerService {
             throw new EntityNotFoundException("No container matches index: " + index);
         }
 
-        return containerDetailsResponseMapper.from(baseEntity.get(), containerEntity.get(), description);
+        return containerDetailsMapper.toContainerDetailsResponse(baseEntity.get(), containerEntity.get(), description);
     }
 }

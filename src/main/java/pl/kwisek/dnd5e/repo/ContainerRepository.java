@@ -12,10 +12,10 @@ import java.util.Optional;
 
 @Repository
 public interface ContainerRepository extends JpaRepository<BaseEntity, String> {
-    @Query("SELECT e.name FROM BaseEntity be WHERE e.category LIKE 'Container'")
+    @Query("SELECT be.name FROM BaseEntity be WHERE be.category LIKE 'Container'")
     List<String> getNames();
 
-    @Query("SELECT e.indexId FROM BaseEntity be WHERE e.category LIKE 'Container'")
+    @Query("SELECT be.indexId FROM BaseEntity be WHERE be.category LIKE 'Container'")
     List<String> getIndexes();
 
     @Query("SELECT ce FROM ContainerEntity ce WHERE ce.entityId = :indexId")

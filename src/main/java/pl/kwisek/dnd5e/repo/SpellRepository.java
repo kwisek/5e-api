@@ -12,12 +12,12 @@ import java.util.Optional;
 
 @Repository
 public interface SpellRepository extends JpaRepository<ItemEntity, String> {
-    @Query("SELECT e.name FROM BaseEntity e WHERE e.category LIKE 'Spell'")
+    @Query("SELECT be.name FROM BaseEntity be WHERE be.category LIKE 'Spell'")
     List<String> getNames();
 
-    @Query("SELECT e.indexId FROM BaseEntity e WHERE e.category LIKE 'Spell'")
+    @Query("SELECT be.indexId FROM BaseEntity be WHERE be.category LIKE 'Spell'")
     List<String> getIndexes();
 
-    @Query("SELECT s FROM SpellEntity s WHERE s.entityId = :indexId")
+    @Query("SELECT se FROM SpellEntity se WHERE se.entityId = :indexId")
     Optional<SpellEntity> findByIndex(@Param("indexId") String index);
 }

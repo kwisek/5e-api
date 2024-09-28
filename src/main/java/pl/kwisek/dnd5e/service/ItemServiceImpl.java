@@ -3,13 +3,12 @@ package pl.kwisek.dnd5e.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.kwisek.dnd5e.dto.response.BaseEntityResponse;
 import pl.kwisek.dnd5e.dto.response.ItemDetailsResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.ItemEntity;
-import pl.kwisek.dnd5e.mapper.ItemDetailsResponseMapper;
+import pl.kwisek.dnd5e.mapper.ItemDetailsMapper;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 import pl.kwisek.dnd5e.repo.DescriptionRepository;
 import pl.kwisek.dnd5e.repo.ItemRepository;
@@ -27,7 +26,7 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     ItemRepository itemRepository;
     @Autowired
-    ItemDetailsResponseMapper itemDetailsResponseMapper;
+    ItemDetailsMapper itemDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -51,6 +50,6 @@ public class ItemServiceImpl implements ItemService {
             throw new EntityNotFoundException("No item matches index: " + index);
         }
 
-        return itemDetailsResponseMapper.from(baseEntity.get(), itemEntity.get(), description);
+        return itemDetailsMapper.toItemDetailsResponse(baseEntity.get(), itemEntity.get(), description);
     }
 }

@@ -24,35 +24,35 @@ public class CommonServiceImpl implements CommonService {
     @Autowired
     private ArmorRepository armorRepository;
     @Autowired
-    private ArmorDetailsResponseMapper armorDetailsResponseMapper;
+    private ArmorDetailsMapper armorDetailsMapper;
     @Autowired
     private WeaponRepository weaponRepository;
     @Autowired
-    private WeaponDetailsResponseMapper weaponDetailsResponseMapper;
+    private WeaponDetailsMapper weaponDetailsMapper;
     @Autowired
     private SkillRepository skillRepository;
     @Autowired
-    private SkillDetailsResponseMapper skillDetailsResponseMapper;
+    private SkillDetailsMapper skillDetailsMapper;
     @Autowired
     private ConceptRepository conceptRepository;
     @Autowired
-    private ConceptDetailsResponseMapper conceptDetailsResponseMapper;
+    private ConceptDetailsMapper conceptDetailsMapper;
     @Autowired
     private ItemRepository itemRepository;
     @Autowired
-    private ItemDetailsResponseMapper itemDetailsResponseMapper;
+    private ItemDetailsMapper itemDetailsMapper;
     @Autowired
     private SpellRepository spellRepository;
     @Autowired
-    private SpellDetailsResponseMapper spellDetailsResponseMapper;
+    private SpellDetailsMapper spellDetailsMapper;
     @Autowired
     private ContainerRepository containerRepository;
     @Autowired
-    private ContainerDetailsResponseMapper containerDetailsResponseMapper;
+    private ContainerDetailsMapper containerDetailsMapper;
     @Autowired
     private EquipmentPackRepository equipmentPackRepository;
     @Autowired
-    private EquipmentPackDetailsResponseMapper equipmentPackDetailsResponseMapper;
+    private EquipmentPackDetailsMapper equipmentPackDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -77,38 +77,38 @@ public class CommonServiceImpl implements CommonService {
         switch (baseEntity.get().getCategory()) {
             case "Armor" -> {
                 Optional<ArmorEntity> armorEntity = this.armorRepository.findByIndex(index);
-                return armorDetailsResponseMapper.from(baseEntity.get(), armorEntity.get(), description);
+                return armorDetailsMapper.toArmorDetailsResponse(baseEntity.get(), armorEntity.get(), description);
             }
             case "Weapon" -> {
                 Optional<WeaponEntity> weaponEntity = this.weaponRepository.findByIndex(index);
-                return weaponDetailsResponseMapper.from(baseEntity.get(), weaponEntity.get(), description);
+                return weaponDetailsMapper.toWeaponDetailsResponse(baseEntity.get(), weaponEntity.get(), description);
             }
             case "Skill" -> {
                 Optional<SkillEntity> skillEntity = this.skillRepository.findByIndex(index);
-                return skillDetailsResponseMapper.from(baseEntity.get(), skillEntity.get(), description);
+                return skillDetailsMapper.toSkillDetailsResponse(baseEntity.get(), skillEntity.get(), description);
             }
             case "Concept" -> {
                 Optional<ConceptEntity> conceptEntity = this.conceptRepository.findByIndex(index);
-                return conceptDetailsResponseMapper.from(conceptEntity.get(), description);
+                return conceptDetailsMapper.toConceptDetailsResponse(conceptEntity.get(), description);
             }
             case "SimpleItem" -> {
                 Optional<ItemEntity> itemEntity = this.itemRepository.findByIndex(index);
-                return itemDetailsResponseMapper.from(baseEntity.get(), itemEntity.get(), description);
+                return itemDetailsMapper.toItemDetailsResponse(baseEntity.get(), itemEntity.get(), description);
             }
             case "Spell" -> {
                 Optional<SpellEntity> spellEntity = this.spellRepository.findByIndex(index);
-                return spellDetailsResponseMapper.from(baseEntity.get(), spellEntity.get(), description);
+                return spellDetailsMapper.toSpellDetailsResponse(baseEntity.get(), spellEntity.get(), description);
             }
             case "Container" -> {
                 Optional<ContainerEntity> containerEntity = this.containerRepository.findByIndex(index);
-                return containerDetailsResponseMapper.from(baseEntity.get(), containerEntity.get(), description);
+                return containerDetailsMapper.toContainerDetailsResponse(baseEntity.get(), containerEntity.get(), description);
             }
             case "EquipmentPack" -> {
                 Optional<EquipmentPackEntity> equipmentPackEntity = this.equipmentPackRepository.findByIndex(index);
-                return equipmentPackDetailsResponseMapper.from(baseEntity.get(), equipmentPackEntity.get(), description);
+                return equipmentPackDetailsMapper.toEquipmentPackDetailsResponse(baseEntity.get(), equipmentPackEntity.get(), description);
             }
         }
 
-        return baseEntityMapper.from(baseEntity.get(), description);
+        return baseEntityMapper.toBaseEntityResponse(baseEntity.get(), description);
     }
 }

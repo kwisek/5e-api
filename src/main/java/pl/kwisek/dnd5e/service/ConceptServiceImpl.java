@@ -7,7 +7,7 @@ import pl.kwisek.dnd5e.dto.response.ConceptDetailsResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.entity.ConceptEntity;
-import pl.kwisek.dnd5e.mapper.ConceptDetailsResponseMapper;
+import pl.kwisek.dnd5e.mapper.ConceptDetailsMapper;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 import pl.kwisek.dnd5e.repo.ConceptRepository;
 import pl.kwisek.dnd5e.repo.DescriptionRepository;
@@ -25,7 +25,7 @@ public class ConceptServiceImpl implements ConceptService {
     @Autowired
     private DescriptionRepository descriptionRepository;
     @Autowired
-    private ConceptDetailsResponseMapper conceptDetailsResponseMapper;
+    private ConceptDetailsMapper conceptDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -47,6 +47,6 @@ public class ConceptServiceImpl implements ConceptService {
             throw new EntityNotFoundException("No concept matches index: " + index);
         }
 
-        return conceptDetailsResponseMapper.from(conceptEntity.get(), description);
+        return conceptDetailsMapper.toConceptDetailsResponse(conceptEntity.get(), description);
     }
 }

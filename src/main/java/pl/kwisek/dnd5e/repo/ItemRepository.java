@@ -11,12 +11,12 @@ import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<ItemEntity, String> {
-    @Query("SELECT e.name FROM BaseEntity e WHERE e.category LIKE 'SimpleItem'")
+    @Query("SELECT be.name FROM BaseEntity be WHERE be.category LIKE 'SimpleItem'")
     List<String> getNames();
 
-    @Query("SELECT e.indexId FROM BaseEntity e WHERE e.category LIKE 'SimpleItem'")
+    @Query("SELECT be.indexId FROM BaseEntity be WHERE be.category LIKE 'SimpleItem'")
     List<String> getIndexes();
 
-    @Query("SELECT i FROM ItemEntity i WHERE i.entityId = :indexId")
+    @Query("SELECT ie FROM ItemEntity ie WHERE ie.entityId = :indexId")
     Optional<ItemEntity> findByIndex(@Param("indexId") String index);
 }

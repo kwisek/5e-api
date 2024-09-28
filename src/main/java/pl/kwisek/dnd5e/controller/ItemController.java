@@ -19,7 +19,7 @@ import pl.kwisek.dnd5e.service.ItemService;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/item", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/v1/item", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ItemController {
 
     @Autowired

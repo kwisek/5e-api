@@ -21,7 +21,7 @@ import pl.kwisek.dnd5e.service.CommonService;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/v1", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class CommonController {
     @Autowired
     CommonService commonService;

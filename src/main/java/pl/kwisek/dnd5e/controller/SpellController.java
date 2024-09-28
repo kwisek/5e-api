@@ -19,7 +19,7 @@ import pl.kwisek.dnd5e.service.SpellService;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/spell", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/v1/spell", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class SpellController {
 
     @Autowired

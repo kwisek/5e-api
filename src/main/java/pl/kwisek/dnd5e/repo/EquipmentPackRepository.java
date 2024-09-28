@@ -12,10 +12,10 @@ import java.util.Optional;
 
 @Repository
 public interface EquipmentPackRepository extends JpaRepository<BaseEntity, String> {
-    @Query("SELECT e.name FROM BaseEntity e WHERE be.category LIKE 'EquipmentPack'")
+    @Query("SELECT be.name FROM BaseEntity be WHERE be.category LIKE 'EquipmentPack'")
     List<String> getNames();
 
-    @Query("SELECT e.indexId FROM BaseEntity e WHERE be.category LIKE 'EquipmentPack'")
+    @Query("SELECT be.indexId FROM BaseEntity be WHERE be.category LIKE 'EquipmentPack'")
     List<String> getIndexes();
 
     @Query("SELECT ep FROM EquipmentPackEntity ep WHERE ep.entityId = :indexId")

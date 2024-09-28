@@ -12,12 +12,12 @@ import java.util.Optional;
 
 @Repository
 public interface ConceptRepository extends JpaRepository<BaseEntity, String> {
-    @Query("SELECT e.name FROM BaseEntity e WHERE e.category LIKE 'Concept'")
+    @Query("SELECT be.name FROM BaseEntity be WHERE be.category LIKE 'Concept'")
     List<String> getNames();
 
-    @Query("SELECT e.indexId FROM BaseEntity e WHERE e.category LIKE 'Concept'")
+    @Query("SELECT be.indexId FROM BaseEntity be WHERE be.category LIKE 'Concept'")
     List<String> getIndexes();
 
-    @Query("SELECT a FROM ArmorEntity a WHERE a.entityId = :indexId")
+    @Query("SELECT ae FROM ArmorEntity ae WHERE ae.entityId = :indexId")
     Optional<ConceptEntity> findByIndex(@Param("indexId") String index);
 }

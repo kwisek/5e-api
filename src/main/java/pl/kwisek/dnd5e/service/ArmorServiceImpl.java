@@ -8,7 +8,7 @@ import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.entity.ArmorEntity;
 import pl.kwisek.dnd5e.entity.BaseEntity;
-import pl.kwisek.dnd5e.mapper.ArmorDetailsResponseMapper;
+import pl.kwisek.dnd5e.mapper.ArmorDetailsMapper;
 import pl.kwisek.dnd5e.repo.ArmorRepository;
 import pl.kwisek.dnd5e.repo.DescriptionRepository;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
@@ -27,7 +27,7 @@ public class ArmorServiceImpl implements ArmorService {
     @Autowired
     private DescriptionRepository descriptionRepository;
     @Autowired
-    private ArmorDetailsResponseMapper armorDetailsResponseMapper;
+    private ArmorDetailsMapper armorDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -50,6 +50,6 @@ public class ArmorServiceImpl implements ArmorService {
             throw new EntityNotFoundException("No armor matches index: " + index);
         }
 
-        return armorDetailsResponseMapper.from(baseEntity.get(), armorEntity.get(), description);
+        return armorDetailsMapper.toArmorDetailsResponse(baseEntity.get(), armorEntity.get(), description);
     }
 }

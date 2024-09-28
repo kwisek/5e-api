@@ -12,12 +12,12 @@ import java.util.Optional;
 
 @Repository
 public interface WeaponRepository extends JpaRepository<BaseEntity, String> {
-    @Query("SELECT e.name FROM BaseEntity e WHERE e.category LIKE 'Weapon'")
+    @Query("SELECT be.name FROM BaseEntity be WHERE be.category LIKE 'Weapon'")
     List<String> getNames();
 
-    @Query("SELECT e.indexId FROM BaseEntity e WHERE e.category LIKE 'Weapon'")
+    @Query("SELECT be.indexId FROM BaseEntity be WHERE be.category LIKE 'Weapon'")
     List<String> getIndexes();
 
-    @Query("SELECT w FROM WeaponEntity w WHERE w.entityId = :indexId")
+    @Query("SELECT we FROM WeaponEntity we WHERE we.entityId = :indexId")
     Optional<WeaponEntity> findByIndex(@Param("indexId") String index);
 }

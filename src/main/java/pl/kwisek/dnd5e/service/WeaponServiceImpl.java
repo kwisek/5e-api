@@ -8,7 +8,7 @@ import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.WeaponEntity;
-import pl.kwisek.dnd5e.mapper.WeaponDetailsResponseMapper;
+import pl.kwisek.dnd5e.mapper.WeaponDetailsMapper;
 import pl.kwisek.dnd5e.repo.DescriptionRepository;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 import pl.kwisek.dnd5e.repo.WeaponRepository;
@@ -27,7 +27,7 @@ public class WeaponServiceImpl implements WeaponService {
     @Autowired
     private WeaponRepository weaponRepository;
     @Autowired
-    private WeaponDetailsResponseMapper weaponDetailsResponseMapper;
+    private WeaponDetailsMapper weaponDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -50,7 +50,7 @@ public class WeaponServiceImpl implements WeaponService {
             throw new EntityNotFoundException("No weapon matches index: " + index);
         }
 
-        return weaponDetailsResponseMapper.from(baseEntity.get(), weaponEntity.get(), description);
+        return weaponDetailsMapper.toWeaponDetailsResponse(baseEntity.get(), weaponEntity.get(), description);
     }
 
 }

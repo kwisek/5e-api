@@ -8,7 +8,7 @@ import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.dto.response.SkillDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.SkillEntity;
-import pl.kwisek.dnd5e.mapper.SkillDetailsResponseMapper;
+import pl.kwisek.dnd5e.mapper.SkillDetailsMapper;
 import pl.kwisek.dnd5e.repo.DescriptionRepository;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 import pl.kwisek.dnd5e.repo.SkillRepository;
@@ -26,7 +26,7 @@ public class SkillServiceImpl implements SkillService {
     @Autowired
     private SkillRepository skillRepository;
     @Autowired
-    private SkillDetailsResponseMapper skillDetailsResponseMapper;
+    private SkillDetailsMapper skillDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -50,6 +50,6 @@ public class SkillServiceImpl implements SkillService {
             throw new EntityNotFoundException("No skill matches index: " + index);
         }
 
-        return skillDetailsResponseMapper.from(baseEntity.get(), skillEntity.get(), description);
+        return skillDetailsMapper.toSkillDetailsResponse(baseEntity.get(), skillEntity.get(), description);
     }
 }

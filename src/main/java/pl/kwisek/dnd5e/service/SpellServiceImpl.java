@@ -5,16 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
-import pl.kwisek.dnd5e.dto.response.SkillDetailsResponse;
 import pl.kwisek.dnd5e.dto.response.SpellDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
-import pl.kwisek.dnd5e.entity.SkillEntity;
 import pl.kwisek.dnd5e.entity.SpellEntity;
-import pl.kwisek.dnd5e.mapper.SkillDetailsResponseMapper;
-import pl.kwisek.dnd5e.mapper.SpellDetailsResponseMapper;
+import pl.kwisek.dnd5e.mapper.SpellDetailsMapper;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 import pl.kwisek.dnd5e.repo.DescriptionRepository;
-import pl.kwisek.dnd5e.repo.SkillRepository;
 import pl.kwisek.dnd5e.repo.SpellRepository;
 
 import java.util.Collection;
@@ -30,7 +26,7 @@ public class SpellServiceImpl implements SpellService {
     @Autowired
     private SpellRepository spellRepository;
     @Autowired
-    private SpellDetailsResponseMapper spellDetailsResponseMapper;
+    private SpellDetailsMapper spellDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {
@@ -54,6 +50,6 @@ public class SpellServiceImpl implements SpellService {
             throw new EntityNotFoundException("No spell matches index: " + index);
         }
 
-        return spellDetailsResponseMapper.from(baseEntity.get(), spellEntity.get(), description);
+        return spellDetailsMapper.toSpellDetailsResponse(baseEntity.get(), spellEntity.get(), description);
     }
 }

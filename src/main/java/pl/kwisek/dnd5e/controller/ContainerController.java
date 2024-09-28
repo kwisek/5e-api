@@ -19,7 +19,7 @@ import pl.kwisek.dnd5e.service.ContainerService;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/container", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/v1/container", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ContainerController {
 
     @Autowired

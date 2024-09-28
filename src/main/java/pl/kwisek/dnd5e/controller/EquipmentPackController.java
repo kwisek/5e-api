@@ -19,7 +19,7 @@ import pl.kwisek.dnd5e.service.EquipmentPackService;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/equipmentpack", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/v1/equipmentpack", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class EquipmentPackController {
 
     @Autowired

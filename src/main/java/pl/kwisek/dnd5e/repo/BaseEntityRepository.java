@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface BaseEntityRepository extends JpaRepository<BaseEntity, String> {
-    @Query("SELECT e FROM BaseEntity e WHERE e.indexId = :indexId")
+    @Query("SELECT be FROM BaseEntity be WHERE be.indexId = :indexId")
     Optional<BaseEntity> findByIndex(@Param("indexId") String index);
-    @Query("SELECT e.indexId FROM BaseEntity e")
+    @Query("SELECT be.indexId FROM BaseEntity be")
     Collection<String> getAllIndexes();
-    @Query("SELECT e.name FROM BaseEntity e")
+    @Query("SELECT be.name FROM BaseEntity be")
     Collection<String> getAllNames();
 }

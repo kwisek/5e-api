@@ -21,7 +21,7 @@ import pl.kwisek.dnd5e.service.ConceptService;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/concept", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/v1/concept", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ConceptController {
     @Autowired
     ConceptService commonService;

@@ -8,12 +8,12 @@ import pl.kwisek.dnd5e.entity.ConceptEntity;
 import java.util.Collection;
 
 @Mapper(componentModel = "spring")
-public abstract class ConceptDetailsResponseMapper {
+public abstract class ConceptDetailsMapper {
     @Mapping(source = "conceptEntity.indexId", target = "index")
     @Mapping(source = "conceptEntity.category", target = "category")
     @Mapping(source = "conceptEntity.subCategory", target = "subCategory")
     @Mapping(source = "conceptEntity.name", target = "name")
     @Mapping(source = "conceptEntity.source", target = "source")
     @Mapping(source = "description", target = "description")
-    public abstract ConceptDetailsResponse from(ConceptEntity conceptEntity, Collection<String> description);
+    public abstract ConceptDetailsResponse toConceptDetailsResponse(ConceptEntity conceptEntity, Collection<String> description);
 }

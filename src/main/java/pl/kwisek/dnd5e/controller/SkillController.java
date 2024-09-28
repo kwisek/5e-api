@@ -19,7 +19,7 @@ import pl.kwisek.dnd5e.service.SkillService;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/skill", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/v1/skill", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class SkillController {
 
     @Autowired

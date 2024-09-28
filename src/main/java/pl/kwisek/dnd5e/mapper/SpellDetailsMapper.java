@@ -9,7 +9,7 @@ import pl.kwisek.dnd5e.entity.SpellEntity;
 import java.util.Collection;
 
 @Mapper(componentModel = "spring")
-public abstract class SpellDetailsResponseMapper {
+public abstract class SpellDetailsMapper {
     @Mapping(source = "baseEntity.indexId", target = "index")
     @Mapping(source = "baseEntity.category", target = "category")
     @Mapping(source = "baseEntity.subCategory", target = "subCategory")
@@ -25,7 +25,7 @@ public abstract class SpellDetailsResponseMapper {
     @Mapping(target = "components", expression = "java(mapComponents(spellEntity))")
     @Mapping(target = "classes", expression = "java(java.util.Arrays.asList(spellEntity.getClasses().split(\", \")))")
     @Mapping(source = "description", target = "description")
-    public abstract SpellDetailsResponse from(BaseEntity baseEntity, SpellEntity spellEntity, Collection<String> description);
+    public abstract SpellDetailsResponse toSpellDetailsResponse(BaseEntity baseEntity, SpellEntity spellEntity, Collection<String> description);
 
     @Mapping(source = "spellEntity.requiredComponentV", target = "V")
     @Mapping(source = "spellEntity.requiredComponentS", target = "S")
@@ -33,5 +33,5 @@ public abstract class SpellDetailsResponseMapper {
     @Mapping(source = "spellEntity.requiredMaterial", target = "material")
     public abstract SpellComponentsSection mapComponents(SpellEntity spellEntity);
 
-    Boolean from(Integer value) { return value != null && value != 0; }
+    Boolean toSpellDetailsResponse(Integer value) { return value != null && value != 0; }
 }
