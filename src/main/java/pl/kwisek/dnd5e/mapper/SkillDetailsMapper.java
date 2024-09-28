@@ -9,6 +9,7 @@ import java.util.Collection;
 
 @Mapper(componentModel = "spring")
 public abstract class SkillDetailsMapper {
+
     @Mapping(source = "baseEntity.indexId", target = "index")
     @Mapping(source = "baseEntity.category", target = "category")
     @Mapping(source = "baseEntity.subCategory", target = "subCategory")

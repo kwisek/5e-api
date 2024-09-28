@@ -1,7 +1,7 @@
 package pl.kwisek.dnd5e.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisek.dnd5e.dto.response.ConceptDetailsResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
@@ -17,15 +17,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ConceptServiceImpl implements ConceptService {
-    @Autowired
-    private BaseEntityRepository baseEntityRepository;
-    @Autowired
-    private ConceptRepository conceptRepository;
-    @Autowired
-    private DescriptionRepository descriptionRepository;
-    @Autowired
-    private ConceptDetailsMapper conceptDetailsMapper;
+
+    private final BaseEntityRepository baseEntityRepository;
+    private final ConceptRepository conceptRepository;
+    private final DescriptionRepository descriptionRepository;
+    private final ConceptDetailsMapper conceptDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {

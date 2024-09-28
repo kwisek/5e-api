@@ -1,7 +1,7 @@
 package pl.kwisek.dnd5e.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisek.dnd5e.dto.response.ContainerDetailsResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
@@ -18,15 +18,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ContainerServiceImpl implements ContainerService {
-    @Autowired
-    private BaseEntityRepository baseEntityRepository;
-    @Autowired
-    private ContainerRepository containerRepository;
-    @Autowired
-    private DescriptionRepository descriptionRepository;
-    @Autowired
-    private ContainerDetailsMapper containerDetailsMapper;
+
+    private final BaseEntityRepository baseEntityRepository;
+    private final ContainerRepository containerRepository;
+    private final DescriptionRepository descriptionRepository;
+    private final ContainerDetailsMapper containerDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {

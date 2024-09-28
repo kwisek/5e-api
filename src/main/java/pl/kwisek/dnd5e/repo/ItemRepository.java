@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<ItemEntity, String> {
+
     @Query("SELECT be.name FROM BaseEntity be WHERE be.category LIKE 'SimpleItem'")
     List<String> getNames();
 

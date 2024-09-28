@@ -1,7 +1,7 @@
 package pl.kwisek.dnd5e.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
@@ -9,8 +9,8 @@ import pl.kwisek.dnd5e.dto.response.SkillDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.SkillEntity;
 import pl.kwisek.dnd5e.mapper.SkillDetailsMapper;
-import pl.kwisek.dnd5e.repo.DescriptionRepository;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
+import pl.kwisek.dnd5e.repo.DescriptionRepository;
 import pl.kwisek.dnd5e.repo.SkillRepository;
 
 import java.util.Collection;
@@ -18,15 +18,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class SkillServiceImpl implements SkillService {
-    @Autowired
-    private BaseEntityRepository baseEntityRepository;
-    @Autowired
-    private DescriptionRepository descriptionRepository;
-    @Autowired
-    private SkillRepository skillRepository;
-    @Autowired
-    private SkillDetailsMapper skillDetailsMapper;
+
+    private final BaseEntityRepository baseEntityRepository;
+    private final DescriptionRepository descriptionRepository;
+    private final SkillRepository skillRepository;
+    private final SkillDetailsMapper skillDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {

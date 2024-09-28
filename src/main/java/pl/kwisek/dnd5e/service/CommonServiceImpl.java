@@ -1,7 +1,7 @@
 package pl.kwisek.dnd5e.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisek.dnd5e.dto.response.BaseEntityResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
@@ -14,45 +14,28 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CommonServiceImpl implements CommonService {
-    @Autowired
-    private BaseEntityRepository baseEntityRepository;
-    @Autowired
-    private BaseEntityMapper baseEntityMapper;
-    @Autowired
-    private DescriptionRepository descriptionRepository;
-    @Autowired
-    private ArmorRepository armorRepository;
-    @Autowired
-    private ArmorDetailsMapper armorDetailsMapper;
-    @Autowired
-    private WeaponRepository weaponRepository;
-    @Autowired
-    private WeaponDetailsMapper weaponDetailsMapper;
-    @Autowired
-    private SkillRepository skillRepository;
-    @Autowired
-    private SkillDetailsMapper skillDetailsMapper;
-    @Autowired
-    private ConceptRepository conceptRepository;
-    @Autowired
-    private ConceptDetailsMapper conceptDetailsMapper;
-    @Autowired
-    private ItemRepository itemRepository;
-    @Autowired
-    private ItemDetailsMapper itemDetailsMapper;
-    @Autowired
-    private SpellRepository spellRepository;
-    @Autowired
-    private SpellDetailsMapper spellDetailsMapper;
-    @Autowired
-    private ContainerRepository containerRepository;
-    @Autowired
-    private ContainerDetailsMapper containerDetailsMapper;
-    @Autowired
-    private EquipmentPackRepository equipmentPackRepository;
-    @Autowired
-    private EquipmentPackDetailsMapper equipmentPackDetailsMapper;
+
+    private final BaseEntityRepository baseEntityRepository;
+    private final BaseEntityMapper baseEntityMapper;
+    private final DescriptionRepository descriptionRepository;
+    private final ArmorRepository armorRepository;
+    private final ArmorDetailsMapper armorDetailsMapper;
+    private final WeaponRepository weaponRepository;
+    private final WeaponDetailsMapper weaponDetailsMapper;
+    private final SkillRepository skillRepository;
+    private final SkillDetailsMapper skillDetailsMapper;
+    private final ConceptRepository conceptRepository;
+    private final ConceptDetailsMapper conceptDetailsMapper;
+    private final ItemRepository itemRepository;
+    private final ItemDetailsMapper itemDetailsMapper;
+    private final SpellRepository spellRepository;
+    private final SpellDetailsMapper spellDetailsMapper;
+    private final ContainerRepository containerRepository;
+    private final ContainerDetailsMapper containerDetailsMapper;
+    private final EquipmentPackRepository equipmentPackRepository;
+    private final EquipmentPackDetailsMapper equipmentPackDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {

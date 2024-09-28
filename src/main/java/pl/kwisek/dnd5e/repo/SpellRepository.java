@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface SpellRepository extends JpaRepository<ItemEntity, String> {
+
     @Query("SELECT be.name FROM BaseEntity be WHERE be.category LIKE 'Spell'")
     List<String> getNames();
 

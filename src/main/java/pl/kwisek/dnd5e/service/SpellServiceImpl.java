@@ -1,7 +1,7 @@
 package pl.kwisek.dnd5e.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
@@ -18,15 +18,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class SpellServiceImpl implements SpellService {
-    @Autowired
-    private BaseEntityRepository baseEntityRepository;
-    @Autowired
-    private DescriptionRepository descriptionRepository;
-    @Autowired
-    private SpellRepository spellRepository;
-    @Autowired
-    private SpellDetailsMapper spellDetailsMapper;
+
+    private final BaseEntityRepository baseEntityRepository;
+    private final DescriptionRepository descriptionRepository;
+    private final SpellRepository spellRepository;
+    private final SpellDetailsMapper spellDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {

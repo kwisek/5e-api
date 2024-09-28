@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface ConceptRepository extends JpaRepository<BaseEntity, String> {
+
     @Query("SELECT be.name FROM BaseEntity be WHERE be.category LIKE 'Concept'")
     List<String> getNames();
 

@@ -20,5 +20,4 @@ public abstract class ItemDetailsMapper {
     @Mapping(source = "itemEntity.weight", target = "weight")
     @Mapping(source = "description", target = "description")
     public abstract ItemDetailsResponse toItemDetailsResponse(BaseEntity baseEntity, ItemEntity itemEntity, Collection<String> description);
-
 }

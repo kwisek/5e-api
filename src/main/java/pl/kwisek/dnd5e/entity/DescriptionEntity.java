@@ -9,6 +9,7 @@ import java.io.Serializable;
 @IdClass(DescriptionId.class)
 @Table(name = "Description")
 public class DescriptionEntity {
+
     @Id
     @Column(name = "entityId")
     private String entityId;
@@ -27,6 +28,7 @@ public class DescriptionEntity {
 
 @Data
 class DescriptionId implements Serializable {
+
     private String entityId;
     private int textOrder;
 }

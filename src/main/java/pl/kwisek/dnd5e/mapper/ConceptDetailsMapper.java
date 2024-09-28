@@ -9,6 +9,7 @@ import java.util.Collection;
 
 @Mapper(componentModel = "spring")
 public abstract class ConceptDetailsMapper {
+
     @Mapping(source = "conceptEntity.indexId", target = "index")
     @Mapping(source = "conceptEntity.category", target = "category")
     @Mapping(source = "conceptEntity.subCategory", target = "subCategory")

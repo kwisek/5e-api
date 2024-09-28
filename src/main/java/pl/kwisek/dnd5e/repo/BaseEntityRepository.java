@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface BaseEntityRepository extends JpaRepository<BaseEntity, String> {
+
     @Query("SELECT be FROM BaseEntity be WHERE be.indexId = :indexId")
     Optional<BaseEntity> findByIndex(@Param("indexId") String index);
     @Query("SELECT be.indexId FROM BaseEntity be")

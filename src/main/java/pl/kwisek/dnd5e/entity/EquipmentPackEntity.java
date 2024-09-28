@@ -7,6 +7,7 @@ import lombok.Data;
 @Table(name = "EquipmentPack")
 @Data
 public class EquipmentPackEntity {
+
     @Id
     @Column(name = "entityId")
     private String entityId;

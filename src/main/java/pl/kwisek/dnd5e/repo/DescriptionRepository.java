@@ -10,6 +10,7 @@ import java.util.Collection;
 
 @Repository
 public interface DescriptionRepository extends JpaRepository<BaseEntity, String> {
+
     @Query("SELECT paragraph FROM DescriptionEntity de WHERE de.id.entityId = :indexId")
     Collection<String> findByIndex(@Param("indexId") String index);
 }

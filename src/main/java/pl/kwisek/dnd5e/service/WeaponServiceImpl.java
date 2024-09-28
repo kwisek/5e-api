@@ -1,6 +1,7 @@
 package pl.kwisek.dnd5e.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
@@ -18,16 +19,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class WeaponServiceImpl implements WeaponService {
 
-    @Autowired
-    private BaseEntityRepository baseEntityRepository;
-    @Autowired
-    private DescriptionRepository descriptionRepository;
-    @Autowired
-    private WeaponRepository weaponRepository;
-    @Autowired
-    private WeaponDetailsMapper weaponDetailsMapper;
+    private final BaseEntityRepository baseEntityRepository;
+    private final DescriptionRepository descriptionRepository;
+    private final WeaponRepository weaponRepository;
+    private final WeaponDetailsMapper weaponDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {

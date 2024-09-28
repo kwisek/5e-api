@@ -1,7 +1,7 @@
 package pl.kwisek.dnd5e.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisek.dnd5e.dto.response.ArmorDetailsResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
@@ -10,24 +10,21 @@ import pl.kwisek.dnd5e.entity.ArmorEntity;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.mapper.ArmorDetailsMapper;
 import pl.kwisek.dnd5e.repo.ArmorRepository;
-import pl.kwisek.dnd5e.repo.DescriptionRepository;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
+import pl.kwisek.dnd5e.repo.DescriptionRepository;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ArmorServiceImpl implements ArmorService {
 
-    @Autowired
-    private BaseEntityRepository baseEntityRepository;
-    @Autowired
-    private ArmorRepository armorRepository;
-    @Autowired
-    private DescriptionRepository descriptionRepository;
-    @Autowired
-    private ArmorDetailsMapper armorDetailsMapper;
+    private final BaseEntityRepository baseEntityRepository;
+    private final ArmorRepository armorRepository;
+    private final DescriptionRepository descriptionRepository;
+    private final ArmorDetailsMapper armorDetailsMapper;
 
     @Override
     public ListOfNamesResponse getAllNames() {

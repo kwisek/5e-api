@@ -8,5 +8,6 @@ import java.util.Collection;
 
 @Mapper(componentModel = "spring")
 public abstract class BaseEntityMapper {
+
     public abstract BaseEntityResponse toBaseEntityResponse(BaseEntity baseEntity, Collection<String> description);
 }

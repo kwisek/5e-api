@@ -5,6 +5,7 @@ import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
 
 public interface WeaponService {
+
     ListOfNamesResponse getAllNames();
     ListOfIndexesResponse getAllIndexes();
     WeaponDetailsResponse getDetails(String index);

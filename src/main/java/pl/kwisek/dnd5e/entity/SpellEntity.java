@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 @Table(name = "Spell")
 public class SpellEntity {
+
     @Id
     @Column(name = "entityId")
     private String entityId;
