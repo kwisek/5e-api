@@ -31,7 +31,7 @@ public class SpellController {
 
     @ApiResponse(responseCode = "200", description = "Returns a list of all available Spell indexes.")
     @GetMapping(path = {"/indexes", "/ids"})
-    public ResponseEntity<ListOfIndexesResponse> getWeaponIndexes() {
+    public ResponseEntity<ListOfIndexesResponse> getSpellIndexes() {
         ListOfIndexesResponse listOfIndexesResponse = spellService.getAllIndexes();
 
         return new ResponseEntity<>(listOfIndexesResponse, HttpStatus.OK);
