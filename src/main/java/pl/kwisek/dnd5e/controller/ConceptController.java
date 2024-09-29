@@ -8,9 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.kwisek.dnd5e.dto.response.BaseEntityResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.service.ConceptService;
@@ -37,11 +35,5 @@ public class ConceptController {
         ListOfIndexesResponse listOfIndexesResponse = commonService.getAllIndexes();
 
         return new ResponseEntity<>(listOfIndexesResponse, HttpStatus.OK);
-    }
-
-    @ApiResponse(responseCode = "200", description = "Returns details of Entity identified by provided index.")
-    @GetMapping(path = "/details")
-    public ResponseEntity<? extends BaseEntityResponse> getEntityDetails(@RequestParam(required = true) String index) {
-        return new ResponseEntity<>(commonService.getDetails(index), HttpStatus.OK);
     }
 }
