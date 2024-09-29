@@ -9,4 +9,5 @@ public interface CommonService {
     ListOfNamesResponse getAllNames();
     ListOfIndexesResponse getAllIndexes();
     BaseEntityResponse getDetails(String index);
+    BaseEntityResponse getDetailsOfClosestMatch(String queryName);
 }

@@ -44,4 +44,10 @@ public class CommonController {
     public ResponseEntity<? extends BaseEntityResponse> getEntityDetails(@RequestParam(required = true) String index) {
         return new ResponseEntity<>(commonService.getDetails(index), HttpStatus.OK);
     }
+
+    @ApiResponse(responseCode = "200", description = "Returns details of Entity the name of which is closest to provided query.")
+    @GetMapping(path = "/closest/details")
+    public ResponseEntity<? extends BaseEntityResponse> getClosestEntityDetails(@RequestParam(required = true) String name) {
+        return new ResponseEntity<>(commonService.getDetailsOfClosestMatch(name), HttpStatus.OK);
+    }
 }

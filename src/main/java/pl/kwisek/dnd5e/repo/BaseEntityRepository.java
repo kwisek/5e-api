@@ -14,6 +14,10 @@ public interface BaseEntityRepository extends JpaRepository<BaseEntity, String> 
 
     @Query("SELECT be FROM BaseEntity be WHERE be.indexId = :indexId")
     Optional<BaseEntity> findByIndex(@Param("indexId") String index);
+
+    @Query("SELECT be FROM BaseEntity be WHERE be.name = :name")
+    Optional<BaseEntity> findByName(@Param("name") String name);
+
     @Query("SELECT be.indexId FROM BaseEntity be")
     Collection<String> getAllIndexes();
     @Query("SELECT be.name FROM BaseEntity be")

@@ -2,6 +2,7 @@ package pl.kwisek.dnd5e.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.kwisek.dnd5e.dto.response.BaseEntityResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
@@ -9,11 +10,12 @@ import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.entity.*;
 import pl.kwisek.dnd5e.mapper.*;
 import pl.kwisek.dnd5e.repo.*;
+import pl.kwisek.dnd5e.utils.StringDistanceUtils;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class CommonServiceImpl implements CommonService {
 
@@ -51,24 +53,47 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public BaseEntityResponse getDetails(String index) {
         Optional<BaseEntity> baseEntity = this.baseEntityRepository.findByIndex(index);
-        Collection<String> description = this.descriptionRepository.findByIndex(index);
 
         if (baseEntity.isEmpty()) {
             throw new EntityNotFoundException("No entity matches index: " + index);
         }
 
-        switch (baseEntity.get().getCategory()) {
+        return this.completeEntityAndMapToResponse(baseEntity.get());
+    }
+
+    @Override
+    public BaseEntityResponse getDetailsOfClosestMatch(String queryName) {
+
+        String closestName = baseEntityRepository.getAllNames().stream()
+            .min(Comparator.comparingInt(name -> StringDistanceUtils.stringDistance(queryName.toLowerCase(), name.toLowerCase())))
+            .orElseThrow(() -> new EntityNotFoundException("No entity matches name: " + queryName));
+
+        BaseEntity closestEntity = baseEntityRepository.findByName(closestName)
+            .orElseThrow(() -> new EntityNotFoundException("No entity matches name: " + queryName));
+
+        log.info("Closest match to " + queryName + " is " + closestName + " with score " +
+            StringDistanceUtils.stringDistance(queryName.toLowerCase(), closestName.toLowerCase()));
+
+        return this.completeEntityAndMapToResponse(closestEntity);
+    }
+
+    private BaseEntityResponse completeEntityAndMapToResponse(BaseEntity baseEntity) {
+
+        String index = baseEntity.getIndexId();
+        Collection<String> description = this.descriptionRepository.findByIndex(index);
+
+        switch (baseEntity.getCategory()) {
             case "Armor" -> {
                 Optional<ArmorEntity> armorEntity = this.armorRepository.findByIndex(index);
-                return armorDetailsMapper.toArmorDetailsResponse(baseEntity.get(), armorEntity.get(), description);
+                return armorDetailsMapper.toArmorDetailsResponse(baseEntity, armorEntity.get(), description);
             }
             case "Weapon" -> {
                 Optional<WeaponEntity> weaponEntity = this.weaponRepository.findByIndex(index);
-                return weaponDetailsMapper.toWeaponDetailsResponse(baseEntity.get(), weaponEntity.get(), description);
+                return weaponDetailsMapper.toWeaponDetailsResponse(baseEntity, weaponEntity.get(), description);
             }
             case "Skill" -> {
                 Optional<SkillEntity> skillEntity = this.skillRepository.findByIndex(index);
-                return skillDetailsMapper.toSkillDetailsResponse(baseEntity.get(), skillEntity.get(), description);
+                return skillDetailsMapper.toSkillDetailsResponse(baseEntity, skillEntity.get(), description);
             }
             case "Concept" -> {
                 Optional<ConceptEntity> conceptEntity = this.conceptRepository.findByIndex(index);
@@ -76,22 +101,22 @@ public class CommonServiceImpl implements CommonService {
             }
             case "SimpleItem" -> {
                 Optional<ItemEntity> itemEntity = this.itemRepository.findByIndex(index);
-                return itemDetailsMapper.toItemDetailsResponse(baseEntity.get(), itemEntity.get(), description);
+                return itemDetailsMapper.toItemDetailsResponse(baseEntity, itemEntity.get(), description);
             }
             case "Spell" -> {
                 Optional<SpellEntity> spellEntity = this.spellRepository.findByIndex(index);
-                return spellDetailsMapper.toSpellDetailsResponse(baseEntity.get(), spellEntity.get(), description);
+                return spellDetailsMapper.toSpellDetailsResponse(baseEntity, spellEntity.get(), description);
             }
             case "Container" -> {
                 Optional<ContainerEntity> containerEntity = this.containerRepository.findByIndex(index);
-                return containerDetailsMapper.toContainerDetailsResponse(baseEntity.get(), containerEntity.get(), description);
+                return containerDetailsMapper.toContainerDetailsResponse(baseEntity, containerEntity.get(), description);
             }
             case "EquipmentPack" -> {
                 Optional<EquipmentPackEntity> equipmentPackEntity = this.equipmentPackRepository.findByIndex(index);
-                return equipmentPackDetailsMapper.toEquipmentPackDetailsResponse(baseEntity.get(), equipmentPackEntity.get(), description);
+                return equipmentPackDetailsMapper.toEquipmentPackDetailsResponse(baseEntity, equipmentPackEntity.get(), description);
             }
         }
 
-        return baseEntityMapper.toBaseEntityResponse(baseEntity.get(), description);
+        return baseEntityMapper.toBaseEntityResponse(baseEntity, description);
     }
 }
