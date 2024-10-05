@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import pl.kwisek.dnd5e.dto.response.ContainerDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.ContainerEntity;
+import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ContainerDetailsMapperTest {
 
     private static final String INDEX_ID = "container-backpack";
-    private static final String CATEGORY = "equipment";
+    private static final Category CATEGORY = Category.CONTAINER;
     private static final String SUB_CATEGORY = "containers";
     private static final String NAME = "Backpack";
     private static final String SOURCE = "Player's Handbook";
@@ -25,7 +26,6 @@ class ContainerDetailsMapperTest {
 
     @Test
     void shouldMapToResponse() {
-
         // given
         BaseEntity baseEntity = this.createBaseEntity();
         ContainerEntity containerEntity = this.createContainerEntity();
@@ -39,10 +39,9 @@ class ContainerDetailsMapperTest {
     }
 
     private BaseEntity createBaseEntity() {
-
         BaseEntity baseEntity = new BaseEntity();
         baseEntity.setIndexId(INDEX_ID);
-        baseEntity.setCategory(CATEGORY);
+        baseEntity.setCategory(CATEGORY.getValue());
         baseEntity.setSubCategory(SUB_CATEGORY);
         baseEntity.setName(NAME);
         baseEntity.setSource(SOURCE);
@@ -51,7 +50,6 @@ class ContainerDetailsMapperTest {
     }
 
     private ContainerEntity createContainerEntity() {
-
         ContainerEntity containerEntity = new ContainerEntity();
         containerEntity.setCost(COST);
         containerEntity.setWeight(WEIGHT);
@@ -61,7 +59,6 @@ class ContainerDetailsMapperTest {
     }
 
     private ContainerDetailsResponse createContainerDetailsResponse() {
-
         return new ContainerDetailsResponse(
             INDEX_ID,
             CATEGORY,

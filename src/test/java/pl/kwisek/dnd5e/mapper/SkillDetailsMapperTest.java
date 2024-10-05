@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import pl.kwisek.dnd5e.dto.response.SkillDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.SkillEntity;
+import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SkillDetailsMapperTest {
 
     private static final String INDEX_ID = "skill-stealth";
-    private static final String CATEGORY = "skills";
+    private static final Category CATEGORY = Category.SKILL;
     private static final String SUB_CATEGORY = "dexterity";
     private static final String NAME = "Stealth";
     private static final String SOURCE = "Player's Handbook";
@@ -23,7 +24,6 @@ class SkillDetailsMapperTest {
 
     @Test
     void shouldMapToResponse() {
-
         // given
         BaseEntity baseEntity = this.createBaseEntity();
         SkillEntity skillEntity = this.createSkillEntity();
@@ -37,10 +37,9 @@ class SkillDetailsMapperTest {
     }
 
     private BaseEntity createBaseEntity() {
-
         BaseEntity baseEntity = new BaseEntity();
         baseEntity.setIndexId(INDEX_ID);
-        baseEntity.setCategory(CATEGORY);
+        baseEntity.setCategory(CATEGORY.getValue());
         baseEntity.setSubCategory(SUB_CATEGORY);
         baseEntity.setName(NAME);
         baseEntity.setSource(SOURCE);
@@ -49,7 +48,6 @@ class SkillDetailsMapperTest {
     }
 
     private SkillEntity createSkillEntity() {
-
         SkillEntity skillEntity = new SkillEntity();
         skillEntity.setAbility(ABILITY);
 
@@ -57,7 +55,6 @@ class SkillDetailsMapperTest {
     }
 
     private SkillDetailsResponse createSkillDetailsResponse() {
-
         return new SkillDetailsResponse(
             INDEX_ID,
             CATEGORY,

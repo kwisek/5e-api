@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import pl.kwisek.dnd5e.dto.response.ItemDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.ItemEntity;
+import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ItemDetailsMapperTest {
 
     private static final String INDEX_ID = "item-healing-potion";
-    private static final String CATEGORY = "equipment";
+    private static final Category CATEGORY = Category.ITEM;
     private static final String SUB_CATEGORY = "potions";
     private static final String NAME = "Healing Potion";
     private static final String SOURCE = "Player's Handbook";
@@ -24,7 +25,6 @@ class ItemDetailsMapperTest {
 
     @Test
     void shouldMapToResponse() {
-
         // given
         BaseEntity baseEntity = this.createBaseEntity();
         ItemEntity itemEntity = this.createItemEntity();
@@ -38,10 +38,9 @@ class ItemDetailsMapperTest {
     }
 
     private BaseEntity createBaseEntity() {
-
         BaseEntity baseEntity = new BaseEntity();
         baseEntity.setIndexId(INDEX_ID);
-        baseEntity.setCategory(CATEGORY);
+        baseEntity.setCategory(CATEGORY.getValue());
         baseEntity.setSubCategory(SUB_CATEGORY);
         baseEntity.setName(NAME);
         baseEntity.setSource(SOURCE);
@@ -50,7 +49,6 @@ class ItemDetailsMapperTest {
     }
 
     private ItemEntity createItemEntity() {
-
         ItemEntity itemEntity = new ItemEntity();
         itemEntity.setCost(COST);
         itemEntity.setWeight(WEIGHT);
@@ -59,7 +57,6 @@ class ItemDetailsMapperTest {
     }
 
     private ItemDetailsResponse createItemDetailsResponse() {
-
         return new ItemDetailsResponse(
             INDEX_ID,
             CATEGORY,

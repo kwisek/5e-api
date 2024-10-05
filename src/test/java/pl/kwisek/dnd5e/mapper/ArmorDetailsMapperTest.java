@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import pl.kwisek.dnd5e.dto.response.ArmorDetailsResponse;
 import pl.kwisek.dnd5e.entity.ArmorEntity;
 import pl.kwisek.dnd5e.entity.BaseEntity;
+import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ArmorDetailsMapperTest {
 
     private static final String INDEX_ID = "armor-chainmail";
-    private static final String CATEGORY = "armor";
+    private static final Category CATEGORY = Category.ARMOR;
     private static final String SUB_CATEGORY = "Heavy armor";
     private static final String NAME = "Chainmail";
     private static final String SOURCE = "Player's Handbook";
@@ -27,7 +28,6 @@ class ArmorDetailsMapperTest {
 
     @Test
     void shouldMapToResponse() {
-
         // given
         BaseEntity baseEntity = this.createBaseEntity();
         ArmorEntity armorEntity = this.createArmorEntity();
@@ -41,10 +41,9 @@ class ArmorDetailsMapperTest {
     }
 
     private BaseEntity createBaseEntity() {
-
         BaseEntity baseEntity = new BaseEntity();
         baseEntity.setIndexId(INDEX_ID);
-        baseEntity.setCategory(CATEGORY);
+        baseEntity.setCategory(CATEGORY.getValue());
         baseEntity.setSubCategory(SUB_CATEGORY);
         baseEntity.setName(NAME);
         baseEntity.setSource(SOURCE);
@@ -53,7 +52,6 @@ class ArmorDetailsMapperTest {
     }
 
     private ArmorEntity createArmorEntity() {
-
         ArmorEntity armorEntity = new ArmorEntity();
         armorEntity.setCost(COST);
         armorEntity.setWeight(WEIGHT);
@@ -65,7 +63,6 @@ class ArmorDetailsMapperTest {
     }
 
     private ArmorDetailsResponse createArmorDetailsResponse() {
-
         return new ArmorDetailsResponse(
             INDEX_ID,
             CATEGORY,

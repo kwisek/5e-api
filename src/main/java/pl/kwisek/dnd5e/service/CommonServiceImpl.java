@@ -8,6 +8,8 @@ import pl.kwisek.dnd5e.dto.response.BaseEntityResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfIndexesResponse;
 import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.entity.*;
+import pl.kwisek.dnd5e.enumeration.Category;
+import pl.kwisek.dnd5e.exception.DataIntegrityException;
 import pl.kwisek.dnd5e.mapper.*;
 import pl.kwisek.dnd5e.repo.*;
 import pl.kwisek.dnd5e.utils.StringDistanceUtils;
@@ -82,41 +84,47 @@ public class CommonServiceImpl implements CommonService {
         String index = baseEntity.getIndexId();
         Collection<String> description = this.descriptionRepository.findByIndex(index);
 
-        switch (baseEntity.getCategory()) {
-            case "Armor" -> {
-                Optional<ArmorEntity> armorEntity = this.armorRepository.findByIndex(index);
-                return armorDetailsMapper.toArmorDetailsResponse(baseEntity, armorEntity.get(), description);
+        try {
+            switch (Category.fromValue(baseEntity.getCategory())) {
+                case ARMOR -> {
+                    Optional<ArmorEntity> armorEntity = this.armorRepository.findByIndex(index);
+                    return armorDetailsMapper.toArmorDetailsResponse(baseEntity, armorEntity.get(), description);
+                }
+                case WEAPON -> {
+                    Optional<WeaponEntity> weaponEntity = this.weaponRepository.findByIndex(index);
+                    return weaponDetailsMapper.toWeaponDetailsResponse(baseEntity, weaponEntity.get(), description);
+                }
+                case SKILL -> {
+                    Optional<SkillEntity> skillEntity = this.skillRepository.findByIndex(index);
+                    return skillDetailsMapper.toSkillDetailsResponse(baseEntity, skillEntity.get(), description);
+                }
+                case CONCEPT -> {
+                    Optional<ConceptEntity> conceptEntity = this.conceptRepository.findByIndex(index);
+                    return conceptDetailsMapper.toConceptDetailsResponse(conceptEntity.get(), description);
+                }
+                case ITEM -> {
+                    Optional<ItemEntity> itemEntity = this.itemRepository.findByIndex(index);
+                    return itemDetailsMapper.toItemDetailsResponse(baseEntity, itemEntity.get(), description);
+                }
+                case SPELL -> {
+                    Optional<SpellEntity> spellEntity = this.spellRepository.findByIndex(index);
+                    return spellDetailsMapper.toSpellDetailsResponse(baseEntity, spellEntity.get(), description);
+                }
+                case CONTAINER -> {
+                    Optional<ContainerEntity> containerEntity = this.containerRepository.findByIndex(index);
+                    return containerDetailsMapper.toContainerDetailsResponse(baseEntity, containerEntity.get(), description);
+                }
+                case EQUIPMENT_PACK -> {
+                    Optional<EquipmentPackEntity> equipmentPackEntity = this.equipmentPackRepository.findByIndex(index);
+                    return equipmentPackDetailsMapper.toEquipmentPackDetailsResponse(baseEntity, equipmentPackEntity.get(), description);
+                }
             }
-            case "Weapon" -> {
-                Optional<WeaponEntity> weaponEntity = this.weaponRepository.findByIndex(index);
-                return weaponDetailsMapper.toWeaponDetailsResponse(baseEntity, weaponEntity.get(), description);
-            }
-            case "Skill" -> {
-                Optional<SkillEntity> skillEntity = this.skillRepository.findByIndex(index);
-                return skillDetailsMapper.toSkillDetailsResponse(baseEntity, skillEntity.get(), description);
-            }
-            case "Concept" -> {
-                Optional<ConceptEntity> conceptEntity = this.conceptRepository.findByIndex(index);
-                return conceptDetailsMapper.toConceptDetailsResponse(conceptEntity.get(), description);
-            }
-            case "SimpleItem" -> {
-                Optional<ItemEntity> itemEntity = this.itemRepository.findByIndex(index);
-                return itemDetailsMapper.toItemDetailsResponse(baseEntity, itemEntity.get(), description);
-            }
-            case "Spell" -> {
-                Optional<SpellEntity> spellEntity = this.spellRepository.findByIndex(index);
-                return spellDetailsMapper.toSpellDetailsResponse(baseEntity, spellEntity.get(), description);
-            }
-            case "Container" -> {
-                Optional<ContainerEntity> containerEntity = this.containerRepository.findByIndex(index);
-                return containerDetailsMapper.toContainerDetailsResponse(baseEntity, containerEntity.get(), description);
-            }
-            case "EquipmentPack" -> {
-                Optional<EquipmentPackEntity> equipmentPackEntity = this.equipmentPackRepository.findByIndex(index);
-                return equipmentPackDetailsMapper.toEquipmentPackDetailsResponse(baseEntity, equipmentPackEntity.get(), description);
-            }
+            return baseEntityMapper.toBaseEntityResponse(baseEntity, description);
+        }
+        catch (NoSuchElementException e) {
+            throw new DataIntegrityException("Null entity for %s".formatted(baseEntity.getIndexId()));
         }
 
-        return baseEntityMapper.toBaseEntityResponse(baseEntity, description);
+
     }
 }

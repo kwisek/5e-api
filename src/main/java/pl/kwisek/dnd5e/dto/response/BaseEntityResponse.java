@@ -3,6 +3,7 @@ package pl.kwisek.dnd5e.dto.response;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 
@@ -12,7 +13,7 @@ public class BaseEntityResponse {
     String index;
 
     @Schema(example = "Category")
-    String category;
+    Category category;
 
     @Schema(example = "SubCategory")
     String subCategory;

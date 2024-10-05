@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.WeaponEntity;
+import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WeaponDetailsMapperTest {
 
     private static final String INDEX_ID = "weapon-longsword";
-    private static final String CATEGORY = "Weapon";
+    private static final Category CATEGORY = Category.WEAPON;
     private static final String SUB_CATEGORY = "Martial Melee Weapons";
     private static final String NAME = "Longsword";
     private static final String SOURCE = "Player's Handbook";
@@ -29,7 +30,6 @@ class WeaponDetailsMapperTest {
 
     @Test
     void shouldMapToResponse() {
-
         // given
         BaseEntity baseEntity = this.createBaseEntity();
         WeaponEntity weaponEntity = this.createWeaponEntity();
@@ -43,10 +43,9 @@ class WeaponDetailsMapperTest {
     }
 
     private BaseEntity createBaseEntity() {
-
         BaseEntity baseEntity = new BaseEntity();
         baseEntity.setIndexId(INDEX_ID);
-        baseEntity.setCategory(CATEGORY);
+        baseEntity.setCategory(CATEGORY.getValue());
         baseEntity.setSubCategory(SUB_CATEGORY);
         baseEntity.setName(NAME);
         baseEntity.setSource(SOURCE);
@@ -55,7 +54,6 @@ class WeaponDetailsMapperTest {
     }
 
     private WeaponEntity createWeaponEntity() {
-
         WeaponEntity weaponEntity = new WeaponEntity();
         weaponEntity.setCost(COST);
         weaponEntity.setWeight(WEIGHT);
@@ -67,7 +65,6 @@ class WeaponDetailsMapperTest {
     }
 
     private WeaponDetailsResponse createWeaponDetailsResponse() {
-
         return new WeaponDetailsResponse(
             INDEX_ID,
             CATEGORY,

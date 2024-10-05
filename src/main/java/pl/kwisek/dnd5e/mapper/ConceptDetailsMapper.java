@@ -11,7 +11,7 @@ import java.util.Collection;
 public abstract class ConceptDetailsMapper {
 
     @Mapping(source = "conceptEntity.indexId", target = "index")
-    @Mapping(source = "conceptEntity.category", target = "category")
+    @Mapping(expression = "java(pl.kwisek.dnd5e.enumeration.Category.fromValue(conceptEntity.getCategory()))", target = "category")
     @Mapping(source = "conceptEntity.subCategory", target = "subCategory")
     @Mapping(source = "conceptEntity.name", target = "name")
     @Mapping(source = "conceptEntity.source", target = "source")

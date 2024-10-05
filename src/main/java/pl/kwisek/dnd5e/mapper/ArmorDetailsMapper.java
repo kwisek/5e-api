@@ -1,5 +1,6 @@
 package pl.kwisek.dnd5e.mapper;
 
+import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import pl.kwisek.dnd5e.dto.response.ArmorDetailsResponse;
@@ -12,7 +13,7 @@ import java.util.Collection;
 public abstract class ArmorDetailsMapper {
 
     @Mapping(source = "baseEntity.indexId", target = "index")
-    @Mapping(source = "baseEntity.category", target = "category")
+    @Mapping(expression = "java(pl.kwisek.dnd5e.enumeration.Category.fromValue(baseEntity.getCategory()))", target = "category")
     @Mapping(source = "baseEntity.subCategory", target = "subCategory")
     @Mapping(source = "baseEntity.name", target = "name")
     @Mapping(source = "baseEntity.source", target = "source")

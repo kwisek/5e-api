@@ -11,7 +11,7 @@ import java.util.Collection;
 public abstract class SkillDetailsMapper {
 
     @Mapping(source = "baseEntity.indexId", target = "index")
-    @Mapping(source = "baseEntity.category", target = "category")
+    @Mapping(expression = "java(pl.kwisek.dnd5e.enumeration.Category.fromValue(baseEntity.getCategory()))", target = "category")
     @Mapping(source = "baseEntity.subCategory", target = "subCategory")
     @Mapping(source = "baseEntity.name", target = "name")
     @Mapping(source = "baseEntity.source", target = "source")

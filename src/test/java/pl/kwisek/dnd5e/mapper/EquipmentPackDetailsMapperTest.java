@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import pl.kwisek.dnd5e.dto.response.EquipmentPackDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.EquipmentPackEntity;
+import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EquipmentPackDetailsMapperTest {
 
     private static final String INDEX_ID = "equipment-pack-explorer";
-    private static final String CATEGORY = "equipment";
+    private static final Category CATEGORY = Category.EQUIPMENT_PACK;
     private static final String SUB_CATEGORY = "packs";
     private static final String NAME = "Explorer's Pack";
     private static final String SOURCE = "Player's Handbook";
@@ -26,7 +27,6 @@ class EquipmentPackDetailsMapperTest {
 
     @Test
     void shouldMapToResponse() {
-
         // given
         BaseEntity baseEntity = this.createBaseEntity();
         EquipmentPackEntity equipmentPackEntity = this.createEquipmentPackEntity();
@@ -40,10 +40,9 @@ class EquipmentPackDetailsMapperTest {
     }
 
     private BaseEntity createBaseEntity() {
-
         BaseEntity baseEntity = new BaseEntity();
         baseEntity.setIndexId(INDEX_ID);
-        baseEntity.setCategory(CATEGORY);
+        baseEntity.setCategory(CATEGORY.getValue());
         baseEntity.setSubCategory(SUB_CATEGORY);
         baseEntity.setName(NAME);
         baseEntity.setSource(SOURCE);
@@ -52,7 +51,6 @@ class EquipmentPackDetailsMapperTest {
     }
 
     private EquipmentPackEntity createEquipmentPackEntity() {
-
         EquipmentPackEntity equipmentPackEntity = new EquipmentPackEntity();
         equipmentPackEntity.setCost(COST);
         equipmentPackEntity.setWeight(WEIGHT);
@@ -62,7 +60,6 @@ class EquipmentPackDetailsMapperTest {
     }
 
     private EquipmentPackDetailsResponse createEquipmentPackDetailsResponse() {
-
         return new EquipmentPackDetailsResponse(
             INDEX_ID,
             CATEGORY,

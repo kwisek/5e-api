@@ -3,16 +3,18 @@ package pl.kwisek.dnd5e.dto.response;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Value;
+import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 
 @Value
 public class ContainerDetailsResponse extends BaseEntityResponse {
+
     @Schema(example = "container-barrel")
     String index;
 
     @Schema(example = "Container")
-    String category;
+    Category category;
 
     @Schema(example = "Container")
     String subCategory;

@@ -4,16 +4,18 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Value;
 import pl.kwisek.dnd5e.dto.SpellComponentsSection;
+import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 
 @Value
 public class SpellDetailsResponse extends BaseEntityResponse {
+
     @Schema(example = "spell-bigbys-hand")
     String index;
 
     @Schema(example = "Spell")
-    String category;
+    Category category;
 
     @Schema(example = "Spell")
     String subCategory;

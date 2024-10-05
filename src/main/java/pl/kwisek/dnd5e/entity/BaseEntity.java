@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 @Table(name = "BaseEntity")
 public class BaseEntity {
+
     @Id
     @Column(name = "indexId")
     private String indexId;

@@ -12,6 +12,7 @@ import pl.kwisek.dnd5e.dto.response.ListOfNamesResponse;
 import pl.kwisek.dnd5e.dto.response.WeaponDetailsResponse;
 import pl.kwisek.dnd5e.entity.BaseEntity;
 import pl.kwisek.dnd5e.entity.WeaponEntity;
+import pl.kwisek.dnd5e.enumeration.Category;
 import pl.kwisek.dnd5e.mapper.WeaponDetailsMapper;
 import pl.kwisek.dnd5e.repo.BaseEntityRepository;
 import pl.kwisek.dnd5e.repo.DescriptionRepository;
@@ -82,7 +83,7 @@ class CommonServiceImplTest {
 
         // given
         String index = "weapon-dagger";
-        String category = "Weapon";
+        Category category = Category.WEAPON;
 
         // mock entities
         WeaponEntity weaponEntity = mock(WeaponEntity.class);
@@ -90,7 +91,7 @@ class CommonServiceImplTest {
         Collection<String> description = Collections.emptyList();
 
         when(baseEntity.getIndexId()).thenReturn(index);
-        when(baseEntity.getCategory()).thenReturn(category);
+        when(baseEntity.getCategory()).thenReturn(category.getValue());
 
         when(baseEntityRepository.findByIndex(index)).thenReturn(Optional.of(baseEntity));
         when(weaponRepository.findByIndex(index)).thenReturn(Optional.of(weaponEntity));
@@ -133,14 +134,14 @@ class CommonServiceImplTest {
         String queryName = "Sword";
         String closestName = "Longsword";
         String closestIndex = "weapon-longsword";
-        String closestCategory = "Weapon";
+        Category closestCategory = Category.WEAPON;
 
         // mock entities
         WeaponEntity weaponEntity = mock(WeaponEntity.class);
         BaseEntity closestBaseEntity = mock(BaseEntity.class);
         Collection<String> description = Collections.emptyList();
 
-        when(closestBaseEntity.getCategory()).thenReturn(closestCategory);
+        when(closestBaseEntity.getCategory()).thenReturn(closestCategory.getValue());
         when(closestBaseEntity.getIndexId()).thenReturn(closestIndex);
 
         // mock repositories
