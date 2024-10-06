@@ -2,57 +2,59 @@ package pl.kwisek.dnd5e.dto.response;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import pl.kwisek.dnd5e.dto.SpellComponentsSection;
 import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 
-@Value
+@AllArgsConstructor
+@Getter
 public class SpellDetailsResponse extends BaseEntityResponse {
 
     @Schema(example = "spell-bigbys-hand")
-    String index;
+    private String index;
 
     @Schema(example = "Spell")
-    Category category;
+    private Category category;
 
     @Schema(example = "Spell")
-    String subCategory;
+    private String subCategory;
 
     @Schema(example = "Bigby's Hand")
-    String name;
+    private String name;
 
     @Schema(example = "Player's Handbook")
-    String source;
+    private String source;
 
     @Schema(description = "Components required by this spell")
-    SpellComponentsSection components;
+    private SpellComponentsSection components;
 
     @Schema(example = "5")
-    Integer level;
+    private Integer level;
 
     @Schema(example = "120 feet")
-    String range;
+    private String range;
 
     @Schema(example = "Evocation")
-    String school;
+    private String school;
 
     @Schema(example = "Concentration, up to 1 minute")
-    String duration;
+    private String duration;
 
     @Schema(example = "false")
-    Boolean ritual;
+    private Boolean ritual;
 
     @Schema(example = "1 action")
-    String castingTime;
+    private String castingTime;
 
     @ArraySchema(schema = @Schema(example = "Artificer"))
-    Collection<String> classes;
+    private Collection<String> classes;
 
     @Schema(example = "When you cast this spell using a spell slot of 6th level or higher, the damage from the clenched fist option increases by 2d8 and the damage from the grasping hand increases by 2d6 for each slot level above 5th.")
-    String higherLevel;
+    private String higherLevel;
 
     @ArraySchema(schema = @Schema(example = ""))
-    Collection<String> description;
+    private Collection<String> description;
 }

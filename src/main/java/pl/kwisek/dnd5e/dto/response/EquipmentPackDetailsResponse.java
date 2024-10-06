@@ -2,38 +2,40 @@ package pl.kwisek.dnd5e.dto.response;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 
-@Value
+@AllArgsConstructor
+@Getter
 public class EquipmentPackDetailsResponse extends BaseEntityResponse {
 
     @Schema(example = "equipmentpack-priests-pack")
-    String index;
+    private String index;
 
     @Schema(example = "EquipmentPack")
-    Category category;
+    private Category category;
 
     @Schema(example = "EquipmentPack")
-    String subCategory;
+    private String subCategory;
 
     @Schema(example = "Priest's Pack")
-    String name;
+    private String name;
 
     @Schema(example = "Player's Handbook")
-    String source;
+    private String source;
 
     @Schema(example = "19 gp")
-    String cost;
+    private String cost;
 
     @Schema(example = "-")
-    String weight;
+    private String weight;
 
     @ArraySchema(schema = @Schema(example = "10 candles"))
-    Collection<String> contents;
+    private Collection<String> contents;
 
     @ArraySchema(schema = @Schema(example = ""))
-    Collection<String> description;
+    private Collection<String> description;
 }

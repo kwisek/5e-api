@@ -9,6 +9,7 @@ import pl.kwisek.dnd5e.enumeration.Category;
 import java.util.Collection;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ArmorDetailsMapperTest {
@@ -37,7 +38,19 @@ class ArmorDetailsMapperTest {
         ArmorDetailsResponse actual = mapper.toArmorDetailsResponse(baseEntity, armorEntity, DESCRIPTION);
 
         // then
-        assertEquals(expected, actual);
+        assertAll(
+                () -> assertEquals(expected.getIndex(), actual.getIndex()),
+                () -> assertEquals(expected.getCategory(), actual.getCategory()),
+                () -> assertEquals(expected.getSubCategory(), actual.getSubCategory()),
+                () -> assertEquals(expected.getName(), actual.getName()),
+                () -> assertEquals(expected.getSource(), actual.getSource()),
+                () -> assertEquals(expected.getCost(), actual.getCost()),
+                () -> assertEquals(expected.getWeight(), actual.getWeight()),
+                () -> assertEquals(expected.getArmorClass(), actual.getArmorClass()),
+                () -> assertEquals(expected.getStrengthRequired(), actual.getStrengthRequired()),
+                () -> assertEquals(expected.getStealthDisadvantage(), actual.getStealthDisadvantage()),
+                () -> assertEquals(expected.getDescription(), actual.getDescription())
+        );
     }
 
     private BaseEntity createBaseEntity() {

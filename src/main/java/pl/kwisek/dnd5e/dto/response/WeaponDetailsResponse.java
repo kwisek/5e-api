@@ -2,44 +2,46 @@ package pl.kwisek.dnd5e.dto.response;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 
-@Value
+@AllArgsConstructor
+@Getter
 public class WeaponDetailsResponse extends BaseEntityResponse {
 
     @Schema(example = "weapon_longsword")
-    String index;
+    private String index;
 
     @Schema(example = "Weapon")
-    Category category;
+    private Category category;
 
     @Schema(example = "Martial Weapons")
-    String subCategory;
+    private String subCategory;
 
     @Schema(example = "Longsword")
-    String name;
+    private String name;
 
     @Schema(example = "Player's Handbook")
-    String source;
+    private String source;
 
     @Schema(example = "15 gp")
-    String cost;
+    private String cost;
 
     @Schema(example = "3 lb.")
-    String weight;
+    private String weight;
 
     @Schema(example = "slashing")
-    String damageType;
+    private String damageType;
 
     @Schema(example = "1d8")
-    String damageRoll;
+    private String damageRoll;
 
     @ArraySchema(schema = @Schema(example = "Versatile (1d10)"))
-    Collection<String> properties;
+    private Collection<String> properties;
 
     @ArraySchema(schema = @Schema(example = "A longsword is a versatile weapon capable of being wielded with one or two hands."))
-    Collection<String> description;
+    private Collection<String> description;
 }

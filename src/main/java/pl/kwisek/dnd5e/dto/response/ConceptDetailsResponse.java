@@ -2,29 +2,31 @@ package pl.kwisek.dnd5e.dto.response;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 
-@Value
+@AllArgsConstructor
+@Getter
 public class ConceptDetailsResponse extends BaseEntityResponse {
 
     @Schema(example = "concept-climbing")
-    String index;
+    private String index;
 
     @Schema(example = "Concept")
-    Category category;
+    private Category category;
 
     @Schema(example = "Movement type")
-    String subCategory;
+    private String subCategory;
 
     @Schema(example = "Climbing")
-    String name;
+    private String name;
 
     @Schema(example = "Player's Handbook")
-    String source;
+    private String source;
 
     @ArraySchema(schema = @Schema(example = "While climbing, each foot of movement costs 1 extra foot (2 extra feet in difficult terrain), unless a creature has a climbing speed. At the GM's option, climbing a slippery vertical surface or one with few handholds requires a successful Strength (Athletics) check."))
-    Collection<String> description;
+    private Collection<String> description;
 }

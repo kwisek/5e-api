@@ -1,13 +1,16 @@
 package pl.kwisek.dnd5e.dto.response;
+
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.Collection;
 
-@Value
+@AllArgsConstructor
+@Getter
 public class ListOfNamesResponse {
 
     @ArraySchema(schema = @Schema(example = "Longsword"))
-    Collection<String> names;
+    private Collection<String> names;
 }

@@ -9,6 +9,7 @@ import pl.kwisek.dnd5e.enumeration.Category;
 import java.util.Collection;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ContainerDetailsMapperTest {
@@ -35,7 +36,16 @@ class ContainerDetailsMapperTest {
         ContainerDetailsResponse actual = mapper.toContainerDetailsResponse(baseEntity, containerEntity, DESCRIPTION);
 
         // then
-        assertEquals(expected, actual);
+        assertAll(
+                () -> assertEquals(expected.getIndex(), actual.getIndex()),
+                () -> assertEquals(expected.getCategory(), actual.getCategory()),
+                () -> assertEquals(expected.getSubCategory(), actual.getSubCategory()),
+                () -> assertEquals(expected.getName(), actual.getName()),
+                () -> assertEquals(expected.getSource(), actual.getSource()),
+                () -> assertEquals(expected.getCost(), actual.getCost()),
+                () -> assertEquals(expected.getWeight(), actual.getWeight()),
+                () -> assertEquals(expected.getCapacity(), actual.getCapacity())
+        );
     }
 
     private BaseEntity createBaseEntity() {

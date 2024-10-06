@@ -9,6 +9,7 @@ import pl.kwisek.dnd5e.enumeration.Category;
 import java.util.Collection;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SkillDetailsMapperTest {
@@ -33,7 +34,14 @@ class SkillDetailsMapperTest {
         SkillDetailsResponse actual = mapper.toSkillDetailsResponse(baseEntity, skillEntity, DESCRIPTION);
 
         // then
-        assertEquals(expected, actual);
+        assertAll(
+                () -> assertEquals(expected.getIndex(), actual.getIndex()),
+                () -> assertEquals(expected.getCategory(), actual.getCategory()),
+                () -> assertEquals(expected.getSubCategory(), actual.getSubCategory()),
+                () -> assertEquals(expected.getName(), actual.getName()),
+                () -> assertEquals(expected.getSource(), actual.getSource()),
+                () -> assertEquals(expected.getAbility(), actual.getAbility())
+        );
     }
 
     private BaseEntity createBaseEntity() {

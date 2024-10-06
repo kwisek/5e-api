@@ -10,6 +10,7 @@ import pl.kwisek.dnd5e.enumeration.Category;
 import java.util.Collection;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SpellDetailsMapperTest {
@@ -47,7 +48,25 @@ class SpellDetailsMapperTest {
         SpellDetailsResponse actual = mapper.toSpellDetailsResponse(baseEntity, spellEntity, DESCRIPTION);
 
         // then
-        assertEquals(expected, actual);
+        assertAll(
+                () -> assertEquals(expected.getIndex(), actual.getIndex()),
+                () -> assertEquals(expected.getCategory(), actual.getCategory()),
+                () -> assertEquals(expected.getSubCategory(), actual.getSubCategory()),
+                () -> assertEquals(expected.getName(), actual.getName()),
+                () -> assertEquals(expected.getSource(), actual.getSource()),
+                () -> assertEquals(expected.getLevel(), actual.getLevel()),
+                () -> assertEquals(expected.getRange(), actual.getRange()),
+                () -> assertEquals(expected.getSchool(), actual.getSchool()),
+                () -> assertEquals(expected.getDuration(), actual.getDuration()),
+                () -> assertEquals(expected.getRitual(), actual.getRitual()),
+                () -> assertEquals(expected.getCastingTime(), actual.getCastingTime()),
+                () -> assertEquals(expected.getHigherLevel(), actual.getHigherLevel()),
+                () -> assertEquals(expected.getClasses(), actual.getClasses()),
+                () -> assertEquals(expected.getComponents().getV(), actual.getComponents().getV()),
+                () -> assertEquals(expected.getComponents().getS(), actual.getComponents().getS()),
+                () -> assertEquals(expected.getComponents().getM(), actual.getComponents().getM()),
+                () -> assertEquals(expected.getComponents().getMaterial(), actual.getComponents().getMaterial())
+        );
     }
 
     private BaseEntity createBaseEntity() {
