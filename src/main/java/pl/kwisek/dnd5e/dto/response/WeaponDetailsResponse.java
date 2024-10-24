@@ -12,36 +12,36 @@ import java.util.Collection;
 @Getter
 public class WeaponDetailsResponse extends BaseEntityResponse {
 
-    @Schema(example = "weapon_longsword")
+    @Schema(description = "Unique index, format: weapon-X.", example = "weapon-longsword")
     private String index;
 
-    @Schema(example = "Weapon")
+    @Schema(description = "Category. For this schema, always will be set to 'Weapon'.", example = "Weapon")
     private Category category;
 
-    @Schema(example = "Martial Weapons")
+    @Schema(description = "Subcategory of a Weapon.", example = "Martial Weapons")
     private String subCategory;
 
-    @Schema(example = "Longsword")
+    @Schema(description = "Exact name.", example = "Longsword")
     private String name;
 
-    @Schema(example = "Player's Handbook")
+    @Schema(description = "Source. Entities are mostly originating from Player's Handbook.", example = "Player's Handbook")
     private String source;
 
-    @Schema(example = "15 gp")
+    @Schema(description = "Value, format: '___,___ _p'. Possible currencies are: pp, gp, sp, cp.", example = "15 gp")
     private String cost;
 
-    @Schema(example = "3 lb.")
+    @Schema(description = "Weight in lbs, format: '_ lb.'", example = "3 lb.")
     private String weight;
 
-    @Schema(example = "slashing")
+    @Schema(description = "Damage type associated with a Weapon.", example = "slashing")
     private String damageType;
 
-    @Schema(example = "1d8")
+    @Schema(description = "Damage roll for a Weapon.", example = "1d8")
     private String damageRoll;
 
-    @ArraySchema(schema = @Schema(example = "Versatile (1d10)"))
+    @ArraySchema(schema = @Schema(description = "Weapon property", example = "Versatile (1d10)"))
     private Collection<String> properties;
 
-    @ArraySchema(schema = @Schema(example = "A longsword is a versatile weapon capable of being wielded with one or two hands."))
+    @Schema(description = "Weight in lbs, format: '_ lb.'", example = "65 lb.")
     private Collection<String> description;
 }

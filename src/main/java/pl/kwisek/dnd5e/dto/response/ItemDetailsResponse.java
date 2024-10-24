@@ -12,27 +12,27 @@ import java.util.Collection;
 @Getter
 public class ItemDetailsResponse extends BaseEntityResponse {
 
-    @Schema(example = "simpleitem-bell")
+    @Schema(description = "Unique index, format: simpleitem-X.", example = "simpleitem-bell")
     private String index;
 
-    @Schema(example = "Simple Item")
+    @Schema(description = "Category. For this schema, always will be set to 'SimpleItem'.", example = "SimpleItem")
     private Category category;
 
-    @Schema(example = "Common Item")
+    @Schema(description = "Subcategory of a Simple Item.", example = "CommonItem")
     private String subCategory;
 
-    @Schema(example = "Bell")
+    @Schema(description = "Exact name.", example = "Bell")
     private String name;
 
-    @Schema(example = "Player's Handbook")
+    @Schema(description = "Source. Entities are mostly originating from Player's Handbook.", example = "Player's Handbook")
     private String source;
 
-    @Schema(example = "1 gp")
+    @Schema(description = "Value, format: '___,___ _p'. Possible currencies are: pp, gp, sp, cp.", example = "1 gp")
     private String cost;
 
-    @Schema(example = "-")
+    @Schema(description = "Weight in lbs, format: '_ lb.'", example = "")
     private String weight;
 
-    @ArraySchema(schema = @Schema(example = "A bell is a small metal device that produces a ringing sound when struck. It can be used for signaling, communication, or as an alarm."))
+    @ArraySchema(schema = @Schema(description = "Description paragraph"))
     private Collection<String> description;
 }

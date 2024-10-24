@@ -9,40 +9,41 @@ import pl.kwisek.dnd5e.enumeration.Category;
 
 import java.util.Collection;
 
+@Schema(description = "Full details of an Armor.")
 @AllArgsConstructor
 @Getter
 public class ArmorDetailsResponse extends BaseEntityResponse {
 
-    @Schema(example = "armor-plate")
+    @Schema(description = "Unique index, format: armor-X.", example = "armor-plate")
     private String index;
 
-    @Schema(example = "Armor")
+    @Schema(description = "Category. For this schema, always will be set to 'Armor'.", example = "Armor")
     private Category category;
 
-    @Schema(example = "Heavy Armor")
+    @Schema(description = "Subcategory of an Armor.", example = "HeavyArmor")
     private String subCategory;
 
-    @Schema(example = "Plate")
+    @Schema(description = "Exact name.", example = "Plate")
     private String name;
 
-    @Schema(example = "Player's Handbook")
+    @Schema(description = "Source. Entities are mostly originating from Player's Handbook.", example = "Player's Handbook")
     private String source;
 
-    @Schema(example = "1,500 gp")
+    @Schema(description = "Value, format: '___,___ _p'. Possible currencies are: pp, gp, sp, cp.", example = "1,500 gp")
     private String cost;
 
-    @Schema(example = "65 lb.")
+    @Schema(description = "Weight in lbs, format: '_ lb.'", example = "65 lb.")
     private String weight;
 
-    @Schema(example = "18")
+    @Schema(description = "Armor class provided by this Armor, according to the Source. Represented as a number.", example = "18")
     private String armorClass;
 
-    @Schema(example = "Str 15")
+    @Schema(description = "Strength required to carry this Armor, according to the Source. Represented as a number.", example = "Str 15")
     private String strengthRequired;
 
-    @Schema(example = "true")
+    @Schema(description = "A boolean telling whether this Armor causes stealth disadvantage (true) or not (false).", example = "true")
     private Boolean stealthDisadvantage;
 
-    @ArraySchema(schema = @Schema(example = "Plate armor consists of shaped, interlocking metal plates to cover the entire body. It provides the highest level of protection among all armors."))
+    @ArraySchema(schema = @Schema(description = "Description paragraph"))
     private Collection<String> description;
 }

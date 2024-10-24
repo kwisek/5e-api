@@ -13,48 +13,48 @@ import java.util.Collection;
 @Getter
 public class SpellDetailsResponse extends BaseEntityResponse {
 
-    @Schema(example = "spell-bigbys-hand")
+    @Schema(description = "Unique index, format: spell-X.", example = "spell-bigbys-hand")
     private String index;
 
-    @Schema(example = "Spell")
+    @Schema(description = "Category. For this schema, always will be set to 'Spell'.", example = "Spell")
     private Category category;
 
-    @Schema(example = "Spell")
+    @Schema(description = "Subcategory of a Spell.", example = "Spell")
     private String subCategory;
 
-    @Schema(example = "Bigby's Hand")
+    @Schema(description = "Exact name.", example = "Bigby's Hand")
     private String name;
 
-    @Schema(example = "Player's Handbook")
+    @Schema(description = "Source. Entities are mostly originating from Player's Handbook.", example = "Player's Handbook")
     private String source;
 
     @Schema(description = "Components required by this spell")
     private SpellComponentsSection components;
 
-    @Schema(example = "5")
+    @Schema(description = "Spell level.", example = "5")
     private Integer level;
 
-    @Schema(example = "120 feet")
+    @Schema(description = "Spell range.", example = "120 feet")
     private String range;
 
-    @Schema(example = "Evocation")
+    @Schema(description = "Spell school.", example = "Evocation")
     private String school;
 
-    @Schema(example = "Concentration, up to 1 minute")
+    @Schema(description = "Duration of a spell.", example = "Concentration, up to 1 minute")
     private String duration;
 
-    @Schema(example = "false")
+    @Schema(description = "Whether ritual is required (true) or not (false).", example = "false")
     private Boolean ritual;
 
-    @Schema(example = "1 action")
+    @Schema(description = "Casting time. Possible value formats are: 'Instant', '1 action', or '_ actions'.", example = "1 action")
     private String castingTime;
 
-    @ArraySchema(schema = @Schema(example = "Artificer"))
+    @ArraySchema(schema = @Schema(description = "Class associated with this Spell.", example = "Artificer"))
     private Collection<String> classes;
 
-    @Schema(example = "When you cast this spell using a spell slot of 6th level or higher, the damage from the clenched fist option increases by 2d8 and the damage from the grasping hand increases by 2d6 for each slot level above 5th.")
+    @Schema(description = "Describes advantages when a spell is casted using a higher level spell slot.", example = "When you cast this spell using a spell slot of 6th level or higher, the damage from the clenched fist option increases by 2d8 and the damage from the grasping hand increases by 2d6 for each slot level above 5th.")
     private String higherLevel;
 
-    @ArraySchema(schema = @Schema(example = ""))
+    @ArraySchema(schema = @Schema(description = "Description paragraph."))
     private Collection<String> description;
 }

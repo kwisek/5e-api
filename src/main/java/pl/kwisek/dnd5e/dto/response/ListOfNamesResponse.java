@@ -11,6 +11,6 @@ import java.util.Collection;
 @Getter
 public class ListOfNamesResponse {
 
-    @ArraySchema(schema = @Schema(example = "Longsword"))
+    @ArraySchema(schema = @Schema(description = "Name of an entity.", example = "Longsword"))
     private Collection<String> names;
 }

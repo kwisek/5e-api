@@ -12,30 +12,30 @@ import java.util.Collection;
 @Getter
 public class ContainerDetailsResponse extends BaseEntityResponse {
 
-    @Schema(example = "container-barrel")
+    @Schema(description = "Unique index, format: Container-X.", example = "container-barrel")
     private String index;
 
-    @Schema(example = "Container")
+    @Schema(description = "Category. For this schema, always will be set to 'Container'.", example = "Container")
     private Category category;
 
-    @Schema(example = "Container")
+    @Schema(description = "Subcategory of a Container. Currently there are no subcategories, so will always be set to 'Container'.", example = "Container")
     private String subCategory;
 
-    @Schema(example = "Barrel")
+    @Schema(description = "Exact name.", example = "Barrel")
     private String name;
 
-    @Schema(example = "Player's Handbook")
+    @Schema(description = "Source. Entities are mostly originating from Player's Handbook.", example = "Player's Handbook")
     private String source;
 
-    @Schema(example = "2 gp")
+    @Schema(description = "Value, format: '___,___ _p'. Possible currencies are: pp, gp, sp, cp.", example = "2 gp")
     private String cost;
 
-    @Schema(example = "70 lb.")
+    @Schema(description = "Weight in lbs, format: '_ lb.'", example = "70 lb.")
     private String weight;
 
-    @Schema(example = "40 gallons liquid, 4 cubic feet solid")
+    @Schema(description = "Describes Container capacity without any standardized format.", example = "40 gallons liquid, 4 cubic feet solid")
     private String capacity;
 
-    @ArraySchema(schema = @Schema(example = "A barrel is a large, cylindrical container made of wooden staves and metal hoops."))
+    @ArraySchema(schema = @Schema(description = "Description paragraph"))
     private Collection<String> description;
 }

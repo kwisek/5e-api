@@ -12,24 +12,24 @@ import java.util.Collection;
 @Getter
 public class SkillDetailsResponse extends BaseEntityResponse {
 
-    @Schema(example = "skill-perception")
+    @Schema(description = "Unique index, format: skill-X.", example = "skill-perception")
     private String index;
 
-    @Schema(example = "Skill")
+    @Schema(description = "Category. For this schema, always will be set to 'Skill'.", example = "Skill")
     private Category category;
 
-    @Schema(example = "Skill")
+    @Schema(description = "Subcategory of a Skill. Currently there are no subcategories, so will always be set to 'Skill'.", example = "Skill")
     private String subCategory;
 
-    @Schema(example = "Perception")
+    @Schema(description = "Exact name.", example = "Perception")
     private String name;
 
-    @Schema(example = "Player's Handbook")
+    @Schema(description = "Source. Entities are mostly originating from Player's Handbook.", example = "Player's Handbook")
     private String source;
 
-    @Schema(example = "Wisdom")
+    @Schema(description = "Ability to which this Skill belongs. Possible values: Strength, Dexterity, Constitution, Wisdom, Intelligence, Charisma.", example = "Wisdom")
     private String ability;
 
-    @ArraySchema(schema = @Schema(example = "Your Perception check lets you spot, hear, or otherwise detect the presence of something. It measures your general awareness of your surroundings and the keenness of your senses. For example, you might try to hear a conversation through a closed door, eavesdrop under an open window, or hear monsters moving stealthily in the forest. Or you might try to spot things that are obscured or easy to miss, whether they are orcs lying in ambush on a road, thugs hiding in the shadows of an alley, or candlelight under a closed secret door."))
+    @ArraySchema(schema = @Schema(description = "Description paragraph"))
     private Collection<String> description;
 }

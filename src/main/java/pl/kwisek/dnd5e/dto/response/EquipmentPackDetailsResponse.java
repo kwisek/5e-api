@@ -12,30 +12,30 @@ import java.util.Collection;
 @Getter
 public class EquipmentPackDetailsResponse extends BaseEntityResponse {
 
-    @Schema(example = "equipmentpack-priests-pack")
+    @Schema(description = "Unique index, format: equipmentpack-X.", example = "equipmentpack-priests-pack")
     private String index;
 
-    @Schema(example = "EquipmentPack")
+    @Schema(description = "Category. For this schema, always will be set to 'EquipmentPack'.", example = "EquipmentPack")
     private Category category;
 
-    @Schema(example = "EquipmentPack")
+    @Schema(description = "Subcategory of an Equipment Pack. Currently there are no subcategories, so will always be set to 'EquipmentPack'.", example = "EquipmentPack")
     private String subCategory;
 
-    @Schema(example = "Priest's Pack")
+    @Schema(description = "Exact name.", example = "Priest's Pack")
     private String name;
 
-    @Schema(example = "Player's Handbook")
+    @Schema(description = "Source. Entities are mostly originating from Player's Handbook.", example = "Player's Handbook")
     private String source;
 
-    @Schema(example = "19 gp")
+    @Schema(description = "Value, format: '___,___ _p'. Possible currencies are: pp, gp, sp, cp.", example = "19 gp")
     private String cost;
 
-    @Schema(example = "-")
+    @Schema(description = "Weight in lbs, format: '_ lb.'", example = "-")
     private String weight;
 
-    @ArraySchema(schema = @Schema(example = "10 candles"))
+    @ArraySchema(schema = @Schema(description = "Content, described as a collection of strings.", example = "10 candles"))
     private Collection<String> contents;
 
-    @ArraySchema(schema = @Schema(example = ""))
+    @ArraySchema(schema = @Schema(description = "Description paragraph"))
     private Collection<String> description;
 }

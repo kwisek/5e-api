@@ -12,21 +12,21 @@ import java.util.Collection;
 @Getter
 public class ConceptDetailsResponse extends BaseEntityResponse {
 
-    @Schema(example = "concept-climbing")
+    @Schema(description = "Unique index, format: concept-X.", example = "concept-climbing")
     private String index;
 
-    @Schema(example = "Concept")
+    @Schema(description = "Category. For this schema, always will be set to 'Concept'.", example = "Concept")
     private Category category;
 
-    @Schema(example = "Movement type")
+    @Schema(description = "Subcategory of a Concept.", example = "Movement type")
     private String subCategory;
 
-    @Schema(example = "Climbing")
+    @Schema(description = "Exact name.", example = "Climbing")
     private String name;
 
-    @Schema(example = "Player's Handbook")
+    @Schema(description = "Source. Entities are mostly originating from Player's Handbook.", example = "Player's Handbook")
     private String source;
 
-    @ArraySchema(schema = @Schema(example = "While climbing, each foot of movement costs 1 extra foot (2 extra feet in difficult terrain), unless a creature has a climbing speed. At the GM's option, climbing a slippery vertical surface or one with few handholds requires a successful Strength (Athletics) check."))
+    @ArraySchema(schema = @Schema(description = "Description paragraph"))
     private Collection<String> description;
 }

@@ -11,6 +11,6 @@ import java.util.Collection;
 @Getter
 public class ListOfIndexesResponse {
 
-    @ArraySchema(schema = @Schema(example = "weapon-longsword"))
+    @ArraySchema(schema = @Schema(description = "Index of an entity.", example = "weapon-longsword"))
     private Collection<String> indexes;
 }
